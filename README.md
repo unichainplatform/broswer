@@ -1,12 +1,11 @@
-### Unichain开发工具
-这是一个专门针对Unichain开发者的钱包工具，支持Unichain的所有功能。
-开发者可以使用本工具链接Unichain的主网、测试网络、以及自己搭建的测试环境，通过本工具创建、发送Unichain的各种交易。
-还可以使用本工具直接查询区块链上的数据。
+### Unichain浏览器
+这是一个专门针对Unichain公链的浏览器，包含了本地钱包、开发环境、区块交易查询、矿工管理等功能。
+用户可以使用本浏览器链接Unichain的主网、测试网络、以及自己搭建的测试环境，创建、发送Unichain的各种交易。
 
 
 如何使用（针对程序猿，需要事先安装好git、node和npm/cnpm）
-1. git clone https://github.com/unichainplatform/webWallet.git
-2. cd webWallet
+1. git clone https://github.com/unichainplatform/broswer.git
+2. cd broswer
 3. cnpm i
 4. cnpm run start -- -p 8080
 5. 在浏览器中访问http://localhost:8080, 节点信息设置按钮位于网页右上角处，默认链接本地节点（http://127.0.0.1:8545），同时也有官方公布的主网和测试网节点地址可供选择
