@@ -32,6 +32,8 @@ const nodeInfo = cookie.load('nodeInfo');
 if (nodeInfo != null && nodeInfo !== '') {
   axios.defaults.baseURL = nodeInfo;
   unichain.utils.setProvider(nodeInfo);
+} else {
+  unichain.utils.setProvider(constant.mainNetRPCAddr);
 }
 
 if (!window.localStorage) {
