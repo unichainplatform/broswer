@@ -24,7 +24,7 @@ export default class Logo extends PureComponent {
     return (
       <div className="logo" style={{}}>
         <Link to="/" className="logo-text">
-          {this.state.networkType}
+          Unichain{this.state.networkType}
         </Link>
       </div>
     );
