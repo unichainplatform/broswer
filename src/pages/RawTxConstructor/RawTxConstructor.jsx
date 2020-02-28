@@ -1024,13 +1024,13 @@ export default class RawTxConstructor extends Component {
           <br />
           <Input hasClear
             style={styles.commonElement}
-            addonBefore="Gas单价（Gaft）:"
+            addonBefore="Gas单价（Gauni）:"
             size="medium"
             defaultValue={this.state.actionCookie.gasPrice}
             onChange={this.handleActionElementChange.bind(this, 'gasPrice')}
           />
           <br />
-          1Gaft = 10<sup>-9</sup>ft = 10<sup>9</sup>aft
+          1Gauni = 10<sup>-9</sup>uni = 10<sup>9</sup>auni
           <br />
           <br />
           <Input hasClear

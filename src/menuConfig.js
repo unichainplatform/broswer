@@ -29,10 +29,10 @@ const headerMenuConfig = [
     path: '/producerList',
     icon: 'repair',
   },
-  {
-    name: T('原始交易构造'),
-    path: '/rawTxConstructor',
-  },
+  // {
+  //   name: T('原始交易构造'),
+  //   path: '/rawTxConstructor',
+  // },
   // {
   //   name: T('自动化测试'),
   //   path: '/autoTest',
