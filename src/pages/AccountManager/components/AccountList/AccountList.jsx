@@ -41,7 +41,7 @@ export default class AccountList extends Component {
       newAccountReg: new RegExp('^([a-z][a-z0-9]{11,15})(\.([a-z0-9]{2,16})){0,2}$'),
       numberReg: new RegExp('^[0-9][0-9]*(\\.[0-9]*){0,1}$'),
       idReg: new RegExp('^[1-9][0-9]*'),
-      srvAddr: 'https://mwallet.ft.im',
+      srvAddr: 'http://47.115.150.104:9001',
       unichainPublicKey: '',
       selfPublicKey: '',
       otherPublicKey: '',
@@ -1015,9 +1015,9 @@ export default class AccountList extends Component {
     this.state.accountInfos.map(account => this.state.accountNames.push(account.accountName));
     if (this.state.accountNames.length == 0) {
       if (this.state.chainConfig.chainId == 1) {
-        this.setState({ srvAddr: 'https://mwallet.ft.im', proxyCreateAccountVisible: true });
+        this.setState({ srvAddr: 'http://47.115.150.104:9000', proxyCreateAccountVisible: true });
       } else {
-        this.setState({ srvAddr: 'https://twallet.ft.im', proxyCreateAccountVisible: true });
+        this.setState({ srvAddr: 'http://47.115.150.104:9001', proxyCreateAccountVisible: true });
       }
       return;
     }
