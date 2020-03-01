@@ -263,7 +263,7 @@ class BasicLayout extends Component {
               })}
 
               {/* 首页默认重定向到 /contractDev */}
-              <Redirect exact from="/" to="/contractDev" />
+              <Redirect exact from="/" to="/dashboard" />
             </Switch>
           </Layout.Main>
         </Layout.Section>
