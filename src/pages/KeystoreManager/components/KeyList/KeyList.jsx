@@ -761,6 +761,7 @@ export default class KeyList extends Component {
       return;
     }
     const wallet = new ethers.Wallet.fromMnemonic(mnemonicWords, bip32path, null);
+    Message.show({type: 'loading', content: T('开始导入...'), duration: 0, hasMask: true});
     this.encryptWallet(wallet, password, T('创建成功'));
   }
 
