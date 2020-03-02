@@ -35,7 +35,7 @@ export default class TxSend extends Component {
       indexesList: [],
       gasPrice: 100,
       gasLimit: 1000000,
-      password: 'syslink888'
+      password: ''
     };
   }
 
@@ -117,7 +117,7 @@ export default class TxSend extends Component {
   }
 
   handlePasswordChange = (v) => {
-    this.state.password = v;
+    this.setState({password: v});
   }
   handleGasPriceChange(v) {
     this.state.gasPrice = v;
@@ -648,7 +648,7 @@ export default class TxSend extends Component {
             style={{ width: 400 }}
             addonBefore="钱包密码"
             size="medium"
-            defaultValue={this.state.password}
+            value={this.state.password}
             maxLength={20}
             hasLimitHint
             onPressEnter={this.onTxConfirmOK.bind(this)}

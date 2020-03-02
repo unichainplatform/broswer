@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import IceContainer from '@icedesign/container';
 import { Table, Button, Input, Dialog, Feedback, Select } from '@icedesign/base';
-import { Tag } from '@alifd/next';
+import { Tag, Message } from '@alifd/next';
 import { ethers } from 'ethers';
 import EthCrypto, { sign } from 'eth-crypto';
 import EccCrypto from 'eccrypto';
@@ -524,6 +524,7 @@ export default class KeyList extends Component {
           importKeyDialogVisible: false, importMnemonicDialogVisible: false, importKeystoreDialogVisible: false,
           password: ConfusePwd, mnemonicWords: ConfuseMnemonic });
         if (toastInfo !== '') {
+          Message.hide();
           Feedback.toast.success(toastInfo);
         }
       }
@@ -546,7 +547,7 @@ export default class KeyList extends Component {
     const ethersKSInfo = unichainKSInfo[0];
 
     if (toastStr !== '') {
-      Feedback.toast.success(toastStr);
+      Message.show({type: 'loading', content: toastStr, duration: 0, hasMask: true});
     }
     ethers.Wallet.fromEncryptedJson(JSON.stringify(ethersKSInfo), this.state.password)
                  .then(succssFunc)
@@ -574,7 +575,7 @@ export default class KeyList extends Component {
       return;
     }
     if (this.state.method === ActionType.CreateFirstAccountByMnemonic) {
-      Feedback.toast.success(T('创建中...'));
+      Message.show({type: 'loading', content: '创建中...', duration: 0});
       this.generateAccount();
     } else if (this.state.method === ActionType.CreateNewAccount) {
       this.processAction((item, index) => index === 0, T('创建中...'), wallet => {
@@ -584,19 +585,19 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.ExportPrivateKey) {
       this.processAction(item => item.address === this.state.curData.address, T('导出中...'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.state.msgContent = wallet.privateKey;
         this.setState( {msgVisible: true, msgTitle: T('私钥信息'), pwdDialogVisible: false} );
       });
     } else if (this.state.method === ActionType.ExportMnemonic) {
       this.processAction(item => item.address === this.state.curData.address, T('导出中...'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.state.msgContent = wallet.mnemonic;
         this.setState( {msgVisible: true, msgTitle: T('助记词信息'), pwdDialogVisible: false} );
       });
     } else if (this.state.method === ActionType.ExportKeyStoreInfo) {      
       this.processAction(item => item.address === this.state.curData.address, T('导出中...'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         const keystoreInfo = utils.getDataFromFile(KeyStoreFile);
         const unichainKSInfo = keystoreInfo.keyList.filter(item => item.address === this.state.curData.address);
         const ethersKSInfo = unichainKSInfo[0];
@@ -606,7 +607,7 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.DeleteAccount) {
       this.processAction(item => item.address === this.state.curData.address, T('删除中...'), wallet => {
-        Feedback.toast.hide();        
+        Message.hide();        
         const address = this.state.curData.address;
         const keystoreInfoObj = utils.getDataFromFile(KeyStoreFile);
         keystoreInfoObj.keyList = keystoreInfoObj.keyList.filter(item => item.address !== address);
@@ -620,7 +621,7 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.ImportKeystore) {
       this.processAction((item, index) => index === 0, T('密码验证中'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.setState({
           importKeystoreDialogVisible: true,
           pwdDialogVisible: false,
@@ -628,7 +629,7 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.ImportPrivateKey) {
       this.processAction((item, index) => index === 0, T('密码验证中'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.setState({
           importKeyDialogVisible: true,
           pwdDialogVisible: false,
@@ -636,7 +637,7 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.SignTxInfo) {
       this.processAction(item => item.address === this.state.curData.address, T('密码验证中'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.state.msgContent = wallet.privateKey;
         this.setState({
           signVisible: true,
@@ -645,7 +646,7 @@ export default class KeyList extends Component {
       });
     } else if (this.state.method === ActionType.CryptoInfo) {
       this.processAction(item => item.address === this.state.curData.address, T('密码验证中'), wallet => {
-        Feedback.toast.hide();
+        Message.hide();
         this.state.msgContent = wallet.privateKey;
         this.setState({
           cryptoVisible: true,

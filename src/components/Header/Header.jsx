@@ -1,7 +1,7 @@
 /* eslint-disable prefer-template */
 /* eslint jsx-a11y/no-noninteractive-element-interactions:0 */
 import React, { PureComponent } from 'react';
-import { Icon, Input, Dialog, Select } from '@icedesign/base';
+import { Icon, Input, Select, Dialog } from '@icedesign/base';
 import Layout from '@icedesign/layout';
 import StyledMenu, {
   Item as MenuItem,
@@ -45,8 +45,10 @@ export default class Header extends PureComponent {
       customNodeDisabled: true,
       languages: [{value: 'ch', label:'中文'}, {value: 'en', label:'English'}],
       defaultLang: (defaultLang == null || defaultLang == 'ch') ? 'ch' : 'en',
-      nodes: [{value: constant.mainNetRPCAddr, label:'主网' + constant.mainNetRPCAddr}, {value: constant.testNetRPCAddr, label:'测试网' + constant.testNetRPCAddr}, 
-              {value: constant.LocalRPCAddr, label:'本地节点' + constant.LocalRPCAddr}, {value: 'others', label: '自定义'}],
+      nodes: [{value: constant.mainNetRPCAddr, label:'主网：' + constant.mainNetRPCAddr}, 
+              {value: constant.testNetRPCAddr1, label:'测试网1：' + constant.testNetRPCAddr1}, {value: constant.testNetRPCAddr2, label:'测试网2：' + constant.testNetRPCAddr2},
+              {value: constant.LocalRPCAddr, label:'本地节点：' + constant.LocalRPCAddr}, 
+              {value: 'others', label: '自定义'}],
     };
     setLang(this.state.defaultLang);
   }
@@ -66,10 +68,9 @@ export default class Header extends PureComponent {
     setLang(v);
     history.push('/');
   }
-  onChangeNode = (v) => {
-    cookie.save('defaultNode', v, {path: '/', maxAge: 3600 * 24 * 360});
-    this.state.nodeInfo = v;
-    this.setState({customNodeDisabled: v != 'others'});
+  onChangeNode = (type, value) => {
+    cookie.save('defaultNode', value, {path: '/', maxAge: 3600 * 24 * 360});
+    this.setState({customNodeDisabled: value != 'others', nodeInfo: value});
   }
   onConfigNodeOK = () => {
     const nodeInfo = this.state.nodeInfo.indexOf('http://') == 0 ? this.state.nodeInfo : 'http://' + this.state.nodeInfo;
@@ -201,7 +202,8 @@ export default class Header extends PureComponent {
             <Select
                 style={{ width: 400 }}
                 placeholder={T("选择节点")}
-                onChange={this.onChangeNode.bind(this)}
+                onChange={this.onChangeNode.bind(this, 'nodeInfo')}
+                value={this.state.nodeInfo}
                 dataSource={this.state.nodes}
             />
             <br />

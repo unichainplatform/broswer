@@ -22,9 +22,13 @@ export default class BlocksTable extends Component {
 
   componentDidMount() {
     this.updateBlockInfo();
-    this.state.intervalId = setInterval(() => {
-      this.updateBlockInfo();
-    }, 3000);
+    
+    unichain.uni.getChainConfig().then(chainConfig => {
+      this.state.intervalId = setInterval(() => {
+        this.updateBlockInfo();
+      }, chainConfig.dposParams.blockInterval);
+    });
+
   }
 
   componentWillUnmount = () => {
@@ -33,6 +37,9 @@ export default class BlocksTable extends Component {
 
   updateBlockInfo = () => {
     unichain.uni.getCurrentBlock(false).then(async(block) => {
+      if (this.state.blockList.length > 0 && block.number <= this.state.blockList[0].number) {
+        return;
+      }
       this.state.blockList = [block, ...this.state.blockList];
       block['txn'] = block.transactions.length;
       let length = this.state.blockList.length;

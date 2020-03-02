@@ -14,7 +14,7 @@ export default class Logo extends PureComponent {
       let networkType = '私网';
       if (chainConfig.chainId == 1) {
         networkType = '主网';
-      } else if (chainConfig.chainId == 100) {
+      } else if (chainConfig.chainId >= 100 && chainConfig.chainId <= 200) {
         networkType = '测试网';
       }
       this.setState({networkType});

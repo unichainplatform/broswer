@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IceContainer from '@icedesign/container';
 import { Dialog, Table, Button, Select, Input, Feedback, NumberPicker } from '@icedesign/base';
-import { Tag, Balloon } from '@alifd/next';
+import { Tag, Balloon, Message } from '@alifd/next';
 
 import BigNumber from 'bignumber.js';
 import * as unichain from 'unichain-web3';
@@ -1113,9 +1113,10 @@ export default class AccountList extends Component {
     }).then(function(result) {
       console.log(result);
       if (result.code == 200) {
-        Feedback.toast.success('账号正在创建');
+        Message.show({type: 'success', content: '账号正在创建', duration: 0});
         setTimeout(() => {
           unichain.uni.getTransactionReceipt(result.msg).then(receipt => {
+            Message.hide();
             if(receipt != null) {
               const status = receipt.actionResults[0].status;
               if (status == 1) {
