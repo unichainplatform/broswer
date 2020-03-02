@@ -417,8 +417,8 @@ function getGasEarned(gasPrice, gasUsed, assetInfo) {
 function getValidTime(timestamp) {
   var renderTime = new BigNumber(timestamp);
   renderTime = renderTime.shiftedBy(6 * -1);
-
-  return new Date(renderTime.toNumber()).toLocaleString()
+  var date = new Date(renderTime.toNumber());
+  return date.toLocaleString() +  '.' + (date.getMilliseconds() + 1000 + '').substr(1);
 }
 // ^(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)\.(1\d{2}|2[0-4]\d|25[0-5]|[1-9]\d|\d)$
 function checkIpVaild(ip) {
@@ -426,7 +426,7 @@ function checkIpVaild(ip) {
                           + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
                           + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)\\."
                           + "(1\\d{2}|2[0-4]\\d|25[0-5]|[1-9]\\d|\\d)$");
-  return ipReg.test(ip);                        
+  return ipReg.test(ip);
 }
 
 function getDuration(my_time) {  

@@ -99,7 +99,7 @@ export default class BlocksTable extends Component {
             dataSource={this.state.blockList}
             primaryKey="number"
           >
-            <Table.Column title={T("时间")} dataIndex="timestamp" width={100} cell={this.renderTimeStamp.bind(this)}/>
+            <Table.Column title={T("时间")} dataIndex="timestamp" width={150} cell={this.renderTimeStamp.bind(this)}/>
             <Table.Column title={T("高度")} dataIndex="number" width={100} />
             <Table.Column title={T("Hash")} dataIndex="hash" width={150} cell={this.renderHash.bind(this)}/>
             <Table.Column title={T("交易数")} dataIndex="txn" width={100} />

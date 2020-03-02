@@ -732,7 +732,7 @@ export default class KeyList extends Component {
     }
     let wallet = new ethers.Wallet(privateKey);
     //const publicKey = '0x' + EthCrypto.publicKeyByPrivateKey(privateKey);
-    Feedback.toast.success(T('开始导入'));
+    Message.show({type: 'loading', content: T('开始导入...'), duration: 0, hasMask: true});
     this.encryptWallet(wallet, password, T('导入成功'));
   };
 
@@ -779,10 +779,11 @@ export default class KeyList extends Component {
     const successFunc = (wallet) => {
       this.encryptWallet(wallet, this.state.password, T('导入成功'));
     };
-    Feedback.toast.success(T('开始导入...'));
+    Message.show({type: 'loading', content: T('开始导入...'), duration: 0, hasMask: true});
     const wallet = ethers.Wallet.fromEncryptedJson(keystoreInfo, keystorePassword)
                   .then(successFunc)
-                  .catch (resp => { 
+                  .catch (resp => {
+                      Message.hide();
                       Feedback.toast.error(resp.message || resp); 
                       console.log(resp.message);
                     });
