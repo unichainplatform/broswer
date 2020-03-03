@@ -115,6 +115,7 @@ export default class AccountList extends Component {
       txFeeInfo: '',
       helpVisible: false,
       thresholdTypes: [{value: 1, label:T('普通交易所需阈值')}, {value: 2, label:T('修改权限所需阈值')}],
+      rpcInfo: '',
     };
   }
 
@@ -124,6 +125,7 @@ export default class AccountList extends Component {
       //unichain.uni.getChainConfig().then(chainConfig => this.state.chainConfig = chainConfig);
       this.state.chainConfig = await unichain.uni.getChainConfig();
       unichain.uni.setChainId(this.state.chainConfig.chainId);
+      this.state.rpcInfo = Constant.chainId2RPC[this.state.chainConfig.chainId];
       this.state.chainConfig.sysTokenID = 0;
       const assetInfo = await unichain.account.getAssetInfoById(this.state.chainConfig.sysTokenID);
       this.state.assetInfos[this.state.chainConfig.sysTokenID] = assetInfo;
@@ -891,10 +893,10 @@ export default class AccountList extends Component {
         {T('权限管理')}
         </Button>
         &nbsp;&nbsp;
-        <Button type="primary" onClick={this.exportPrivateKey.bind(this, index)}>
+        {/* <Button type="primary" onClick={this.exportPrivateKey.bind(this, index)}>
         {T('导出私钥')}
         </Button>
-        &nbsp;&nbsp;
+        &nbsp;&nbsp; */}
         {abiBtn}{setByteCodeBtn}
       </view>
     );
@@ -1105,7 +1107,9 @@ export default class AccountList extends Component {
       return;
     }
     const srvRequest = this.state.srvAddr + '/wallet_account_creation?accname=' 
-                  + this.state.newAccountName + '&pubkey=' + publicKey + '&deviceid=webWallet';
+                  + this.state.newAccountName + '&pubkey=' + publicKey + '&deviceid=webWallet' 
+                  + '&rpchost=' + this.state.rpcInfo.rpcHost + '&rpcport=' + this.state.rpcInfo.rpcPort
+                  + '&chainid=' + this.state.chainConfig.chainId;
 
     const self = this;
     fetch(srvRequest).then(function(response) {
