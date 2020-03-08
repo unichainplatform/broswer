@@ -229,7 +229,7 @@ class BlockTxLayout extends Component {
             {T('投票数')}
             </div>
             <div style={styles.count} className="count">
-              {this.state.latestEpchoInfo.totalQuantity} FT
+              {this.state.latestEpchoInfo.totalQuantity} UNI
               <span style={styles.extraIcon}>
                 <Balloon
                   trigger={
@@ -248,7 +248,7 @@ class BlockTxLayout extends Component {
               </span>
             </div>
             <div style={styles.smallCount} className="count">
-              {this.state.latestEpchoInfo.activatedTotalQuantity} FT
+              {this.state.latestEpchoInfo.activatedTotalQuantity} UNI
               <span style={styles.extraIcon}>
                 <Balloon
                   trigger={
