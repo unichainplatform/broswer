@@ -1018,8 +1018,10 @@ export default class AccountList extends Component {
     if (this.state.accountNames.length == 0) {
       if (this.state.chainConfig.chainId == 1) {
         this.setState({ srvAddr: 'http://47.115.150.104:9000', proxyCreateAccountVisible: true });
-      } else {
+      } else if (this.state.chainConfig.chainId == 100) {
         this.setState({ srvAddr: 'http://47.115.150.104:9001', proxyCreateAccountVisible: true });
+      } else if (this.state.chainConfig.chainId == 200) {
+        this.setState({ srvAddr: 'http://47.115.150.104:9002', proxyCreateAccountVisible: true });
       }
       return;
     }
