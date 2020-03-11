@@ -552,6 +552,7 @@ export default class KeyList extends Component {
     ethers.Wallet.fromEncryptedJson(JSON.stringify(ethersKSInfo), this.state.password)
                  .then(succssFunc)
                  .catch (resp => { 
+                    Message.hide();
                     Feedback.toast.error(resp.message || resp); 
                     console.log(resp.message);
                   });

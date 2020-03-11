@@ -1063,7 +1063,7 @@ export default class ContractManager extends Component {
     const actionInfo = { actionType: Constant.CREATE_NEW_ACCOUNT,
       accountName: creator.accountName,
       toAccountName: 'unichain.account',  // unichain.account
-      assetId: Constant.SysTokenId,  // ft
+      assetId: Constant.SysTokenId,
       gasLimit,
       amount: amountValue,
       payload };
@@ -1100,7 +1100,7 @@ export default class ContractManager extends Component {
     const actionInfo = { actionType: Constant.CREATE_CONTRACT,
       accountName: contractAccountName,
       toAccountName: contractAccountName,
-      assetId: Constant.SysTokenId,  // ft
+      assetId: Constant.SysTokenId,
       gasLimit,
       amount: 0,
       payload };
@@ -1298,8 +1298,11 @@ export default class ContractManager extends Component {
         publicKey = ksInfoObj['publicKey'];
       }
       const chainId = unichain.uni.getChainId();
-      const srvRequest = this.state.accountSrv[chainId] + '/wallet_account_creation?accname=' 
-                  + this.state.firstAccountName + '&pubkey=' + publicKey + '&deviceid=ftchainide';
+      const rpcInfo = Constant.chainId2RPC[chainId];
+      const srvRequest = Constant.proxySrvAddr[chainId] + '/wallet_account_creation?accname=' 
+                  + this.state.firstAccountName + '&pubkey=' + publicKey + '&deviceid=webWallet' 
+                  + '&rpchost=' + rpcInfo.rpcHost + '&rpcport=' + rpcInfo.rpcPort
+                  + '&chainid=' + chainId;
 
       const self = this;
       //Feedback.toast.success('开始创建账号');
@@ -1629,7 +1632,7 @@ export default class ContractManager extends Component {
             onChange={this.handleFTAmountChange.bind(this)}
             defaultValue={this.state.ftAmount}
             style={{ width: 300 }}
-            addonBefore={T("转账金额(FT)")}
+            addonBefore={T("转账金额UNI")}
             size="medium"
           />
           <br/>
@@ -1644,7 +1647,7 @@ export default class ContractManager extends Component {
             hasLimitHint
           />
           <br />
-          1Gaft = 10<sup>-9</sup>ft = 10<sup>9</sup>aft
+          1Gauni = 10<sup>-9</sup>uni = 10<sup>9</sup>auni
           <br />
           <br />
           <Input hasClear hasLimitHint

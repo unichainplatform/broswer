@@ -1015,14 +1015,8 @@ export default class AccountList extends Component {
   addAccountBySelf = () => {
     this.state.accountNames = [];
     this.state.accountInfos.map(account => this.state.accountNames.push(account.accountName));
-    if (this.state.accountNames.length == 0) {
-      if (this.state.chainConfig.chainId == 1) {
-        this.setState({ srvAddr: 'http://47.115.150.104:9000', proxyCreateAccountVisible: true });
-      } else if (this.state.chainConfig.chainId == 100) {
-        this.setState({ srvAddr: 'http://47.115.150.104:9001', proxyCreateAccountVisible: true });
-      } else if (this.state.chainConfig.chainId == 200) {
-        this.setState({ srvAddr: 'http://47.115.150.104:9002', proxyCreateAccountVisible: true });
-      }
+    if (this.state.accountNames.length == 0) {      
+      this.setState({ srvAddr: Constant.proxySrvAddr[this.state.chainConfig.chainId], proxyCreateAccountVisible: true });
       return;
     }
     this.setState({ selfCreateAccountVisible: true, txSendVisible: false });
@@ -1076,7 +1070,7 @@ export default class AccountList extends Component {
     this.state.txInfo = { actionType: Constant.CREATE_NEW_ACCOUNT,
       accountName: this.state.curAccount.accountName,
       toAccountName: this.state.chainConfig.accountName,  // unichain.account
-      assetId: this.state.chainConfig.sysTokenID,  // ft
+      assetId: this.state.chainConfig.sysTokenID, 
       amount: amountValue,
       payload };
 

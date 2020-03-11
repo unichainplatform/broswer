@@ -94,7 +94,7 @@ export default class TransactionList extends Component {
             }
             var parsedAction = txParser.parseAction(actionInfo, _this.state.assetInfos[actionInfo.assetID], _this.state.assetInfos, dposInfo);
             parsedAction['result'] = actionResults[i].status == 1 ? T('成功') : T('失败') + '（' + actionResults[i].error + '）';
-            parsedAction['gasFee'] = utils.getGasEarned(transaction.gasPrice, actionResults[i].gasUsed, _this.state.assetInfos[transaction.gasAssetID]) + ' ft';
+            parsedAction['gasFee'] = utils.getGasEarned(transaction.gasPrice, actionResults[i].gasUsed, _this.state.assetInfos[transaction.gasAssetID]) + ' uni';
             parsedAction['fromAccount'] = actionInfo.from;
             parsedAction['gasAllot'] = actionResults[i].gasAllot;
             parsedActions.push(parsedAction);
@@ -188,8 +188,8 @@ export default class TransactionList extends Component {
         reason = T('合约的发行者');
       }
       const earnedGas = utils.getGasEarned(record.gasPrice, gasAllot.gas, this.state.assetInfos[record.gasAssetID]);
-      const defaultTrigger = <Tag type="normal" size="small">{gasAllot.name}{reason}分到 {earnedGas}ft</Tag>;
-      return <Balloon trigger={defaultTrigger} closable={false}>{gasAllot.name}{reason}分到 {earnedGas}ft</Balloon>;
+      const defaultTrigger = <Tag type="normal" size="small">{gasAllot.name}{reason}分到 {earnedGas}uni</Tag>;
+      return <Balloon trigger={defaultTrigger} closable={false}>{gasAllot.name}{reason}分到 {earnedGas}uni</Balloon>;
     });
   }
 

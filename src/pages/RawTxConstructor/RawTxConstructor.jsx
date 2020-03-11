@@ -159,7 +159,7 @@ export default class RawTxConstructor extends Component {
       return;
     }
     let txUri = this.state.txUri.trim();
-    const startHeadStr = 'ft://unichain/';
+    const startHeadStr = 'uni://unichain/';
     if (txUri.indexOf(startHeadStr) != 0) {
       Feedback.toast.error('URI格式有误');
       return;
