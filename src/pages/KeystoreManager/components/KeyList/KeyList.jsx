@@ -530,6 +530,7 @@ export default class KeyList extends Component {
       }
       
     }).catch(error => {
+      Message.hide();
       Feedback.toast.error(error.message || error); 
       console.log(error.message);
     });

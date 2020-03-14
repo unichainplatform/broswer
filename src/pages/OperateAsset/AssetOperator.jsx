@@ -9,6 +9,7 @@ import AssetFounderSet from './AssetFounderSet';
 import AssetOwnerSet from './AssetOwnerSet';
 import AssetDestroy from './AssetDestroy';
 import AssetContractSet from './AssetContractSet';
+import AssetSearch from '../SearchAsset';
 import * as utils from '../../utils/utils';  
 import { T } from '../../utils/lang';  
 import * as AssetUtils from './AssetUtils';
@@ -49,70 +50,73 @@ export default class AssetOperator extends Component {
 
   render() {
     return (
-      <IceContainer style={styles.container}>
-        <h4 style={styles.title}>{T("资产操作")}</h4>
-        <IceContainer style={styles.subContainer}>
-          <Select
-            style={{ width: 350 }}
-            placeholder={T("选择发起资产操作的账户")}
-            onChange={this.onChangeAccount.bind(this)}
-            dataSource={this.state.accounts}
-          />
+      <div>
+        <IceContainer style={styles.container}>
+          <h4 style={styles.title}>{T("资产操作")}</h4>
+          <IceContainer style={styles.subContainer}>
+            <Select
+              style={{ width: 350 }}
+              placeholder={T("选择发起资产操作的账户")}
+              onChange={this.onChangeAccount.bind(this)}
+              dataSource={this.state.accounts}
+            />
+          </IceContainer>
+          <Card
+            style={styles.card}
+            title={T("发行资产")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetIssueTable accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet}/>
+          </Card>
+
+          <Card
+            style={styles.card}
+            title={T("增发资产")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetIncrease accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet}/>
+          </Card>
+
+          <Card
+            style={styles.card}
+            title={T("设置资产管理者")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetOwnerSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
+          </Card>
+
+          <Card
+            style={styles.card}
+            title={T("设置资产创办者")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetFounderSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
+          </Card>
+
+          <Card
+            style={styles.card}
+            title={T("设置协议资产")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetContractSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
+          </Card>
+
+          <Card
+            style={styles.card}
+            title={T("销毁资产")}
+            language="en-us"
+            bodyHeight={this.state.cardHeight}
+          >
+            <AssetDestroy accountName={this.state.selectedAccountName} dposInfo={this.state.dposInfo}/>
+          </Card>
         </IceContainer>
-        <Card
-          style={styles.card}
-          title={T("发行资产")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetIssueTable accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet}/>
-        </Card>
-
-        <Card
-          style={styles.card}
-          title={T("增发资产")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetIncrease accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet}/>
-        </Card>
-
-        <Card
-          style={styles.card}
-          title={T("设置资产管理者")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetOwnerSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
-        </Card>
-
-        <Card
-          style={styles.card}
-          title={T("设置资产创办者")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetFounderSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
-        </Card>
-
-        <Card
-          style={styles.card}
-          title={T("设置协议资产")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetContractSet accountName={this.state.selectedAccountName} assetInfoSet={this.state.assetInfoSet} />
-        </Card>
-
-        <Card
-          style={styles.card}
-          title={T("销毁资产")}
-          language="en-us"
-          bodyHeight={this.state.cardHeight}
-        >
-          <AssetDestroy accountName={this.state.selectedAccountName} dposInfo={this.state.dposInfo}/>
-        </Card>
-      </IceContainer>
+        <AssetSearch />
+      </div>
     );
   }
 }

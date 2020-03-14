@@ -76,11 +76,11 @@ const TxReceiptResult = ({self, contractName, funcName}) => {
       addonBefore={T("交易/Receipt信息:")}
       size="medium"
     /> */}
-    交易信息:<br />
+    {T('交易信息:')}<br />
     <ReactJson key='txInfoResult' id={contractName + funcName + 'TxInfo'}
       src={utils.isEmptyObj(self.state.result[contractName + funcName + 'TxInfo']) ? {} : JSON.parse(self.state.result[contractName + funcName + 'TxInfo'])}
     />
-    <br />Receipt信息:<br />
+    <br /> {T('Receipt信息:')}<br />
     <ReactJson key='receiptInfoResult' id={contractName + funcName + 'ReceiptInfo'}
       src={utils.isEmptyObj(self.state.result[contractName + funcName + 'ReceiptInfo']) ? {} : JSON.parse(self.state.result[contractName + funcName + 'ReceiptInfo'])}
     />
@@ -184,11 +184,11 @@ const ContractArea = ({ self, contract }) => {
   }
   );
   return <div>
-          只读类接口:<br/>
+          {T('只读类接口:')}<br/>
           <DisplayOneTypeFuncs self={self} abiInfos={readonlyFuncs} contract={contract}/>
-          <br/>写入类接口:<br/>
+          <br/>{T('写入类接口:')}<br/>
           <DisplayOneTypeFuncs self={self} abiInfos={writableFuncs} contract={contract}/>
-          <br/>写入并可支付类接口:<br/>
+          <br/>{T('写入并可支付类接口:')}<br/>
           <DisplayOneTypeFuncs self={self} abiInfos={writablePayableFuncs} contract={contract}/>
         </div>
       
@@ -199,8 +199,8 @@ const ContractCollapse = ({self, contractAccountInfo}) => {
   return <Collapse rtl='ltr'>
             {contractAccountInfo.map((contract, index) => (
               <Panel key={index}  
-                title={"编号：" + (index + 1) + '，合约账号:' + contract.contractAccountName 
-                       + '，合约名：' + contract.contractName + '，创建时间：' + (contract.createDate == null ? '未记录' : contract.createDate)}>
+                title={T("编号:") + (index + 1) + '，' + T('合约账号:') + contract.contractAccountName 
+                       + '，' + T('合约名:') + contract.contractName + '，' + T('创建时间:') + (contract.createDate == null ? T('未记录') : contract.createDate)}>
                 <ContractArea self={self} contract={contract}/>
               </Panel>
             ))}
@@ -280,7 +280,6 @@ export default class ContractManager extends Component {
       gasLimit: 10000000,
       ftAmount: 10,      
       createAccountVisible: false,
-      accountSrv: {1: 'https://mwallet.ft.im', 100: 'http://182.92.108.173:12345'},
       shareCodeContract: {},
      };
      const solFileList = global.localStorage.getItem('solFileList');
@@ -576,15 +575,15 @@ export default class ContractManager extends Component {
       Feedback.toast.error(T('请选择待编译的文件'));
       return;
     }
-    this.addLog("开始编译");
+    this.addLog(T("开始编译"));
     const compileResult = await CompilerSrv.compileSol(this.state.selectedAccountName, this.state.selectedFileToCompile);
     if (compileResult.err != null) {
-      Feedback.toast.error("编译失败");
+      Feedback.toast.error(T("编译失败"));
       this.addLog(compileResult.err);
       return;
     }
-    Feedback.toast.success("编译成功");
-    this.addLog("编译成功");
+    Feedback.toast.success(T("编译成功"));
+    this.addLog(T("编译成功"));
 
     this.state.fileContractMap[this.state.selectedFileToCompile] = compileResult;
     this.state.contractList = [];
@@ -592,7 +591,7 @@ export default class ContractManager extends Component {
       const compiledInfo = this.state.fileContractMap[contractFile];
       for (var contractName in compiledInfo) {
         this.state.contractList.push(contractFile + ":" + contractName);
-        this.addLog("合约" + contractName + "编译结果\n" + compiledInfo[contractName].abi);
+        this.addLog(T("合约 ") + contractName + T(" 编译结果") + '\n' + compiledInfo[contractName].abi);
       }
     }
     global.localStorage.setItem("contractList", JSON.stringify(this.state.contractList));
@@ -1387,27 +1386,27 @@ export default class ContractManager extends Component {
         <Row className="custom-row" >
             <Col fixedSpan="11" className="custom-col-left-sidebar">
               <br />
-              <Button type="primary" onClick={this.addSolFile}>添加合约</Button>
+              <Button type="primary" onClick={this.addSolFile}>{T('添加合约')}</Button>
               &nbsp;&nbsp;
-              <Button type="primary" onClick={this.delSolFile}>删除选中合约</Button>
+              <Button type="primary" onClick={this.delSolFile}>{T('删除选中合约')}</Button>
               <Tree editable showLine draggable selectable
                   defaultExpandedKeys={['0', '1', '2']}
                   onEditFinish={this.onEditFinish.bind(this)}
                   onRightClick={this.onRightClick}
                   onSelect={this.onSelectSolFile}>
-                  <TreeNode key="0" label="我的合约" selectable={false}>
+                  <TreeNode key="0" label={T('我的合约')} selectable={false}>
                     {
                       this.state.solFileList.map(solFile => <TreeNode key={solFile} label={solFile}/>)
                     }
                   </TreeNode>
                   
-                  <TreeNode key="1" label="公共库(可直接调用)" selectable={false}>
+                  <TreeNode key="1" label={T('公共库(可直接调用)')} selectable={false}>
                     {
                       this.state.libFileList.map(solFile => <TreeNode key={solFile} label={solFile}/>)
                     }
                   </TreeNode>
                   
-                  <TreeNode key="2" label="示例(仅供参考)" selectable={false}>
+                  <TreeNode key="2" label={T('示例(仅供参考)')} selectable={false}>
                     {
                       this.state.smapleFileList.map(solFile => <TreeNode key={solFile} label={solFile}/>)
                     }
@@ -1506,7 +1505,7 @@ export default class ContractManager extends Component {
               <br/>
               {
                 this.state.constructorParaNames.length > 0 ? 
-                <Card style={{ width: '100%', marginBottom: "20px" }} bodyHeight="auto" title="构造函数">
+                <Card style={{ width: '100%', marginBottom: "20px" }} bodyHeight="auto" title={T("构造函数")}>
                   <Parameters self={this} width='250' contractName={this.state.curContractName} funcName='constructor' 
                     parameterNames={this.state.constructorParaNames} parameterTypes={this.state.constructorParaTypes} />
                 </Card> : ''
@@ -1559,7 +1558,7 @@ export default class ContractManager extends Component {
           onOk={this.onDisplayABIOK.bind(this)}
           onCancel={this.onDisplayABIClose.bind(this)}
           onClose={this.onDisplayABIClose.bind(this)}
-          okProps={{children: '复制ABI'}}
+          okProps={{children: T('复制ABI')}}
         >
           <ReactJson src={this.state.curAbi}/>
         </Dialog>
@@ -1572,7 +1571,7 @@ export default class ContractManager extends Component {
           onOk={this.onDisplayBINOK.bind(this)}
           onCancel={this.onDisplayBINClose.bind(this)}
           onClose={this.onDisplayBINClose.bind(this)}
-          okProps={{children: '复制BIN'}}
+          okProps={{children: T('复制BIN')}}
         >
           <IceEllipsis lineNumber={10} text= {this.state.curBin} />
         </Dialog>
@@ -1640,7 +1639,7 @@ export default class ContractManager extends Component {
           <Input hasClear
             onChange={this.handleGasPriceChange.bind(this)}
             style={{ width: 300 }}
-            addonBefore="GAS单价"
+            addonBefore={T("GAS单价")}
             addonAfter="Gaft"
             size="medium"
             defaultValue={this.state.gasPrice}
@@ -1653,7 +1652,7 @@ export default class ContractManager extends Component {
           <Input hasClear hasLimitHint
             onChange={this.handleGasLimitChange.bind(this)}
             style={{ width: 300 }}
-            addonBefore="GAS数量上限"
+            addonBefore={T("GAS数量上限")}
             size="medium"
             defaultValue={this.state.gasLimit}
           />
@@ -1663,7 +1662,7 @@ export default class ContractManager extends Component {
             htmlType="password"
             onChange={this.handlePasswordChange.bind(this)}
             style={{ width: 300 }}
-            addonBefore="钱包密码"
+            addonBefore={T("钱包密码")}
             size="medium"
             defaultValue=""
             maxLength={20}

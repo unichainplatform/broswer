@@ -20,12 +20,17 @@ const headerMenuConfig = [
     icon: 'search',
   },
   {
+    name: T('资产'),
+    path: '/assetOperator',
+    icon: 'ul-list'
+  },
+  {
     name: T('合约开发'),
     path: '/contractDev',
     icon: 'code',
   },
   {
-    name: '矿工',
+    name: T('矿工'),
     path: '/producerList',
     icon: 'repair',
   },
@@ -46,11 +51,6 @@ const headerMenuConfig = [
   //   name: T('学习资料'),
   //   path: '/study',
   //   icon: 'code',
-  // },
-  // {
-  //   name: T('资产发行'),
-  //   path: '/assetOperator',
-  //   icon: 'ul-list'
   // },
 ];
 

@@ -94,7 +94,7 @@ export default class BlocksTable extends Component {
   render() {
     return (
       <div className="progress-table">
-        <IceContainer className="tab-card" title="区块">
+        <IceContainer className="tab-card" title={T("区块")}>
           <Table
             dataSource={this.state.blockList}
             primaryKey="number"

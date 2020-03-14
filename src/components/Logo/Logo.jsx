@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import * as unichain from 'unichain-web3';
+import { T } from '../../utils/lang';
 
 export default class Logo extends PureComponent {
   constructor(props) {
@@ -22,9 +23,9 @@ export default class Logo extends PureComponent {
   }
   render() {
     return (
-      <div className="logo" style={{}}>
+      <div className="logo">
         <Link to="/" className="logo-text">
-          Unichain{this.state.networkType}
+          Unichain({T(this.state.networkType)})
         </Link>
       </div>
     );

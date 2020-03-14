@@ -45,10 +45,10 @@ export default class Header extends PureComponent {
       customNodeDisabled: true,
       languages: [{value: 'ch', label:'中文'}, {value: 'en', label:'English'}],
       defaultLang: (defaultLang == null || defaultLang == 'ch') ? 'ch' : 'en',
-      nodes: [{value: constant.mainNetRPCAddr, label:'主网：' + constant.mainNetRPCAddr}, 
-              {value: constant.testNetRPCAddr1, label:'测试网1：' + constant.testNetRPCAddr1}, {value: constant.testNetRPCAddr2, label:'测试网2：' + constant.testNetRPCAddr2},
-              {value: constant.LocalRPCAddr, label:'本地节点：' + constant.LocalRPCAddr}, 
-              {value: 'others', label: '自定义'}],
+      nodes: [{value: constant.mainNetRPCAddr, label:T('主网：') + constant.mainNetRPCAddr}, 
+              {value: constant.testNetRPCAddr1, label:T('测试网1：') + constant.testNetRPCAddr1}, {value: constant.testNetRPCAddr2, label:T('测试网2：') + constant.testNetRPCAddr2},
+              {value: constant.LocalRPCAddr, label:T('本地节点：') + constant.LocalRPCAddr}, 
+              {value: 'others', label: T('自定义')}],
     };
     setLang(this.state.defaultLang);
   }
@@ -118,7 +118,7 @@ export default class Header extends PureComponent {
                 const linkProps = {};
                 if (nav.children) {
                   subMenu = {items: []};
-                  subMenu.label = nav.name;
+                  subMenu.label = T(nav.name);
                   nav.children.map(item => {
                     if (item.newWindow) {
                       subMenu.items.push({value: item.name, href: item.path, target: '_blank'});
@@ -156,11 +156,11 @@ export default class Header extends PureComponent {
                   <MenuItem key={idx}>
                     {linkProps.to ? (
                       <Link {...linkProps}>
-                        {!isMobile ? nav.name : null}
+                        {!isMobile ? T(nav.name) : null}
                       </Link>
                     ) : (
                       <a {...linkProps}>
-                        {!isMobile ? nav.name : null}
+                        {!isMobile ? T(nav.name) : null}
                       </a>
                     )}
                   </MenuItem>
@@ -175,14 +175,14 @@ export default class Header extends PureComponent {
           className="ice-design-layout-header-menu"
           style={{ display: 'flex' }}
         >
-          {/* <Select
+          <Select
             style={{ width: 100 }}
             placeholder={T("语言")}
             onChange={this.onChangeLanguage.bind(this)}
             dataSource={this.state.languages}
             defaultValue={this.state.defaultLang}
           />
-          &nbsp;&nbsp; */}
+          &nbsp;&nbsp;
 
           <Balloon trigger={defaultTrigger} closable={false}>
             {T('当前连接的节点')}:{this.state.nodeInfo}, ChainId:{this.state.chainId}

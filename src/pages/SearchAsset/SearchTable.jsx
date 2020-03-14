@@ -6,6 +6,7 @@ import IceContainer from '@icedesign/container';
 import BigNumber from 'bignumber.js';
 import * as unichain from 'unichain-web3';
 import * as utils from '../../utils/utils';  
+import { T } from '../../utils/lang';
 
 const { Row, Col } = Grid;
 
@@ -45,7 +46,7 @@ export default class SearchTable extends Component {
       const balanceInfos = [];
       const account = await unichain.account.getAccountByName(value.key);
       if (account == null) {
-        Feedback.toast.error('无此账户信息');
+        Feedback.toast.error(T('无此账户信息'));
         return;
       }
       const assetBalances = account.balances;
@@ -100,7 +101,7 @@ export default class SearchTable extends Component {
         }
   
         if (assetInfo == null) {
-          Feedback.toast.error('无此资产信息');
+          Feedback.toast.error(T('无此资产信息'));
           return;
         }
   
@@ -115,7 +116,7 @@ export default class SearchTable extends Component {
     return (
       <div>
         <IceContainer style={styles.container}>
-          <h4 style={styles.title}>用户资产信息</h4>
+          <h4 style={styles.title}>{T('用户资产信息')}</h4>
           <IceContainer>
             <Row style={{ justifyContent: 'center' }}>
               <Col span="24" s="10" l="10">
@@ -123,7 +124,7 @@ export default class SearchTable extends Component {
                   size="large"
                   autoWidth="true"
                   onSearch={this.onSearch.bind(this)}
-                  placeholder="用户账号"
+                  placeholder={T('用户账号')}
                 />
               </Col>
             </Row>
@@ -135,8 +136,8 @@ export default class SearchTable extends Component {
               hasBorder={false}
               style={{ padding: '0 20px 20px' }}
             >
-              <Table.Column title="资产ID" dataIndex="assetID" width={50} />
-              <Table.Column title="金额" dataIndex="balance" width={200} />
+              <Table.Column title={T("资产ID")} dataIndex="assetID" width={50} />
+              <Table.Column title={T("金额")} dataIndex="balance" width={200} />
             </Table>
             <Pagination
               style={styles.pagination}
@@ -147,7 +148,7 @@ export default class SearchTable extends Component {
         </IceContainer>
 
         <IceContainer style={styles.container}>
-          <h4 style={styles.title}>资产发行信息</h4>
+          <h4 style={styles.title}>{T("资产发行信息")} </h4>
           <IceContainer>
             <Row style={{ justifyContent: 'center' }}>
               <Col span="24" s="10" l="10">
@@ -155,7 +156,7 @@ export default class SearchTable extends Component {
                   size="large"
                   autoWidth="true"
                   onSearch={this.onAssetSearch.bind(this)}
-                  placeholder="资产ID/资产名称"
+                  placeholder={T("资产ID/资产名称")} 
                 />
               </Col>
             </Row>
@@ -167,18 +168,18 @@ export default class SearchTable extends Component {
               hasBorder={false}
               style={{ padding: '0 20px 20px' }}
             >
-              <Table.Column title="资产ID" dataIndex="assetId" width={50} />
-              <Table.Column title="名称" dataIndex="assetName" width={50} />
-              <Table.Column title="符号" dataIndex="symbol" width={50} />
-              <Table.Column title="创建区块高度" dataIndex="number" width={50} />
-              <Table.Column title="已发行量" dataIndex="amount" width={50} />
-              <Table.Column title="精度" dataIndex="decimals" width={50} />
-              <Table.Column title="创建人" dataIndex="founder" width={50} />
-              <Table.Column title="管理者" dataIndex="owner" width={50} />
-              <Table.Column title="增发量" dataIndex="addIssue" width={50} />
-              <Table.Column title="资产上限" dataIndex="upperLimit" width={50} />
-              <Table.Column title="合约账号" dataIndex="contract" width={50} />
-              <Table.Column title="描述" dataIndex="description" width={50} />
+              <Table.Column title={T("资产ID")} dataIndex="assetId" width={50} />
+              <Table.Column title={T("名称")} dataIndex="assetName" width={50} />
+              <Table.Column title={T("符号")} dataIndex="symbol" width={50} />
+              <Table.Column title={T("创建区块高度")} dataIndex="number" width={50} />
+              <Table.Column title={T("已发行量")} dataIndex="amount" width={50} />
+              <Table.Column title={T("精度")} dataIndex="decimals" width={50} />
+              <Table.Column title={T("创建人")} dataIndex="founder" width={50} />
+              <Table.Column title={T("管理者")} dataIndex="owner" width={50} />
+              <Table.Column title={T("增发量")} dataIndex="addIssue" width={50} />
+              <Table.Column title={T("资产上限")} dataIndex="upperLimit" width={50} />
+              <Table.Column title={T("合约账号")} dataIndex="contract" width={50} />
+              <Table.Column title={T("描述")} dataIndex="description" width={50} />
             </Table>
           </IceContainer>
         </IceContainer>

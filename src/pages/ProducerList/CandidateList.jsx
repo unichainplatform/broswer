@@ -443,9 +443,9 @@ export default class CandidateList extends Component {
     }
     
     return <view>
-            [总出块数:{value}]<p/>[总出块率:{counterRatio}]
+            [{T('总出块数')}:{value}]<p/>[{T('总出块率')}:{counterRatio}]
             <p/>
-            [本周期出块数:{curEpochActualCounter}]<p/>[本周期出块率:{curEpochRatio}]
+            [{T('本周期出块数')}:{curEpochActualCounter}]<p/>[{T('本周期出块率')}:{curEpochRatio}]
            </view>; 
   }
   shouldCounterRender = (value, index, record) => {
@@ -455,7 +455,7 @@ export default class CandidateList extends Component {
       curEpochShouldCounter = curEpochData.shouldCount;
     }
     return <view>
-            [总应出块数:{value}]<p/>[本周期应出块数:{curEpochShouldCounter}]
+            [{T('总应出块数')}:{value}]<p/>[{T('本周期应出块数')}:{curEpochShouldCounter}]
            </view>; 
   }
 
@@ -557,10 +557,10 @@ export default class CandidateList extends Component {
           <Button type="primary" onClick={this.refundReposit.bind(this)} disabled={!this.state.bMyProducer || !this.state.bUnRegProducer}>
           {T('取回抵押金')}
           </Button>
-            &nbsp;&nbsp;
+            {/* &nbsp;&nbsp;
           <Button type="primary" onClick={this.getReward.bind(this)} disabled={!this.state.bMyProducer || this.state.bUnRegProducer}>
           {T('提取奖励')}
-          </Button>
+          </Button> */}
             &nbsp;&nbsp;
             <b>{T('当前周期')}:{this.state.curEpoch}, {T('一个周期时长')}:{this.state.duration}</b>
         </p>
@@ -649,7 +649,7 @@ export default class CandidateList extends Component {
           <br />
           <Input hasClear
             trim
-            placeholder='抵押票数固定为50万FT'
+            placeholder={T('抵押票数固定为50万UNI')}
             onChange={this.handleStakeChange.bind(this)}
             style={{ width: 400 }}
             addonBefore={T("抵押票数")}

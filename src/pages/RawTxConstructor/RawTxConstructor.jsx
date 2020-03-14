@@ -106,6 +106,8 @@ export default class RawTxConstructor extends Component {
       getObjIndex: 0,
       checkObjIndex: 0,
       zeroNum: 18,
+
+      accountPrefix: '',
     };
     if (actionCookieObj != null) {
       Object.keys(actionCookieObj).map(key => {
@@ -1090,6 +1092,17 @@ export default class RawTxConstructor extends Component {
         </IceContainer>
         <br />
         <br />
+        <IceContainer title='账号生成'>   
+          <Input multiple
+            rows="10"
+            style={styles.commonElement}
+            addonBefore="账号名前缀"
+            size="medium"
+            value={this.state.accountPrefix}
+            onChange={this.handleAccountPrefixChange.bind(this)}
+          />
+        </IceContainer>
+
         <IceContainer style={{display: 'none'}} title='测试场景'>          
           <Input 
             style={styles.halfElement}
