@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Feedback, Card, Select, Checkbox } from '@icedesign/base';
+import { Link } from 'react-router-dom';
 import Container from '@icedesign/container';
 import { Button, Tab, Grid, Tree, Dialog, Collapse, Message } from '@alifd/next';
 import * as unichain from 'unichain-web3';
@@ -315,10 +316,12 @@ export default class ContractManager extends Component {
     const chainConfig = await unichain.uni.getChainConfig();
     unichain.uni.setChainId(chainConfig.chainId);
 
-    const keystoreList = utils.loadKeystoreFromLS();    
-    for (const keystore of keystoreList) {
-      this.state.keystoreInfo[keystore.publicKey] = keystore;
-    }
+    const keystoreList = utils.loadKeystoreFromLS();
+    if (keystoreList != null) {
+      for (const keystore of keystoreList) {
+        this.state.keystoreInfo[keystore.publicKey] = keystore;
+      }
+    }    
 
     const accounts = await utils.loadAccountsFromLS();
     for (let account of accounts) {
@@ -514,7 +517,7 @@ export default class ContractManager extends Component {
       Feedback.toast.error(T('请输入合约账号'));
       return;
     }
-    unichain.account.getAccountByName(this.state.loadedContractAccount).then(account => {
+    unichain.account.getAccountByName(this.state.loadedContractAccount).then(async (account) => {
       if (account == null) {
         Feedback.toast.error(T('此账号不存在'));
         return;
@@ -530,6 +533,12 @@ export default class ContractManager extends Component {
                                  utils.isEmptyObj(contractName) ? 'tmpName-' + utils.getRandomInt(10000) : contractName , 
                                  contractAbi);
         return;
+      } else {
+        const bURC20 = await utils.checkURC20(this.state.loadedContractAccount);
+        if (bURC20) {
+          this.displayContractFunc(this.state.loadedContractAccount, 'URC20-' + utils.getRandomInt(10000), Constant.URC20ABI);
+          return;
+        }
       }
       this.setState({ contractInfoVisible: true, txSendVisible: false });
     });
@@ -608,7 +617,7 @@ export default class ContractManager extends Component {
     this.setState({compileSrvSettingVisible: true, txSendVisible: false});
   }
   // 部署合约分两步：
-  // 1:创建账户，需：账户名(自动生成), 公钥(同发起账户)，转账FT金额(用于部署合约)
+  // 1:创建账户，需：账户名(自动生成), 公钥(同发起账户)，转UNI金额(用于部署合约)
   // 2:将合约bytecode附加到第一步创建的账户中
   deployContract = async () => {
     if (this.state.selectedContractToDeploy == null) {
@@ -1111,22 +1120,22 @@ export default class ContractManager extends Component {
   }
   onDeployContractOK = async () => {
     if (this.state.newContractAccountName == null) {
-      Feedback.toast.error('请输入合约账户名');
+      Feedback.toast.error(T('请输入合约账户名'));
       return;
     }
 
     if (utils.isEmptyObj(this.state.gasPrice)) {
-      Feedback.toast.error('请输入GAS单价');
+      Feedback.toast.error(T('请输入GAS单价'));
       return;
     }
 
     if (utils.isEmptyObj(this.state.gasLimit)) {
-      Feedback.toast.error('请输入愿意支付的最多GAS数量');
+      Feedback.toast.error(T('请输入愿意支付的最多GAS数量'));
       return;
     }
 
     if (utils.isEmptyObj(this.state.password)) {
-      Feedback.toast.error('请输入钱包密码');
+      Feedback.toast.error(T('请输入钱包密码'));
       return;
     }
 
@@ -1147,7 +1156,7 @@ export default class ContractManager extends Component {
     for (let paraName of this.state.constructorParaNames) {
       let value = this.state.paraValue[this.state.curContractName + '-constructor-' + paraName];
       if (value == null) {
-        Message.error('参数' + paraName + '尚未输入值');
+        Message.error(T('参数') + paraName + T('尚未输入值'));
         return;
       }
       const type = this.state.constructorParaTypes[index];
@@ -1155,7 +1164,7 @@ export default class ContractManager extends Component {
         value = ((value == 'false' || value == 0) ? false : true);
       } else if (type.lastIndexOf(']') === type.length - 1) {
         if (value.indexOf('[') != 0 || value.lastIndexOf(']') != value.length - 1) {
-          Message.error('数组类型的值请按如下格式填写：[a,b,c]');
+          Message.error(T('数组类型的值请按如下格式填写:' + '[a,b,c]'));
           return;
         }          
         values.push(value.substr(1, value.length - 2).split(','));
@@ -1166,27 +1175,27 @@ export default class ContractManager extends Component {
     }
     const constructorPayload = abiUtil.rawEncode(this.state.constructorParaTypes, values).toString('hex');
 
-    Feedback.toast.success('开始部署合约');
-    this.addLog('开始部署合约');
+    Feedback.toast.success(T('开始部署合约'));
+    this.addLog(T('开始部署合约'));
     const contractAccount = await unichain.account.getAccountByName(this.state.newContractAccountName);
     if (contractAccount != null) {
       if (!this.checkBalanceEnough(contractAccount, this.state.gasPrice, this.state.gasLimit, this.state.ftAmount)) {        
-        Feedback.toast.error(T('FT余额不足，无法发起交易'));
+        Feedback.toast.error(T('UNI余额不足，无法发起交易'));
         return;
       }
       // 由合约账户直接发起部署合约的操作
       this.deployContractTx(this.state.newContractAccountName, contractCode.bin + constructorPayload, this.state.gasPrice, this.state.gasLimit).then(txHash => {
-        this.addLog('部署合约的交易hash:' + txHash);
-        this.checkReceipt('部署合约', txHash, () => {
-          Feedback.toast.success('成功部署合约');
+        this.addLog(T('部署合约的交易hash:') + txHash);
+        this.checkReceipt(T('部署合约'), txHash, () => {
+          Feedback.toast.success(T('成功部署合约'));
           this.setState({deployContractVisible: false, txSendVisible: false});
           this.processContractDepolyed(this.state.newContractAccountName, contractInfo[1], JSON.parse(contractCode.abi));
         });
       }).catch(error => {
-        this.addLog('部署合约交易发送失败:' + error);
-        Feedback.toast.error('部署合约交易发送失败：' + error);
+        this.addLog(T('部署合约交易发送失败:') + error);
+        Feedback.toast.error(T('部署合约交易发送失败:') + error);
       });
-      Feedback.toast.success('开始发送交易');
+      Feedback.toast.success(T('开始发送交易'));
     } else {
       if (utils.isEmptyObj(this.state.selectedAccountName)) {
         Feedback.toast.error(T('请选择创建者账号'));
@@ -1199,7 +1208,7 @@ export default class ContractManager extends Component {
       }
 
       if (utils.isEmptyObj(this.state.ftAmount)) {
-        Feedback.toast.error(T('请输入FT转账金额'));
+        Feedback.toast.error(T('请输入UNI转账金额'));
         return;
       }
       
@@ -1209,27 +1218,27 @@ export default class ContractManager extends Component {
         return;
       }
       if (!this.checkBalanceEnough(this.state.selectedAccount, this.state.gasPrice, this.state.gasLimit, this.state.ftAmount)) {        
-        Feedback.toast.error(T('FT余额不足，无法发起交易'));
+        Feedback.toast.error(T('UNI余额不足，无法发起交易'));
         return;
       }
       // 1:由发起账户创建合约账户
       this.createAccountTx(this.state.newContractAccountName, this.state.selectedAccount, publicKey,
                            this.state.ftAmount, this.state.gasPrice, this.state.gasLimit).then(txHash => {
-        this.addLog('创建账户的交易hash:' + txHash);
-        this.checkReceipt('创建账户', txHash, () => {
+        this.addLog(T('创建账户的交易hash:') + txHash);
+        this.checkReceipt(T('创建账户'), txHash, () => {
           // 2:由合约账户部署合约
-          Feedback.toast.success('合约账户创建成功，即将为账户添加合约代码');  
-          this.addLog('合约账户已创建，可部署合约');    
+          Feedback.toast.success(T('合约账户创建成功，即将为账户添加合约代码'));  
+          this.addLog(T('合约账户已创建，可部署合约'));    
           this.deployContractTx(this.state.newContractAccountName, contractCode.bin + constructorPayload, this.state.gasPrice, this.state.gasLimit).then(txHash => {
-            this.addLog('部署合约的交易hash:' + txHash);
-            this.checkReceipt('部署合约', txHash, () => {
-              Feedback.toast.success('成功部署合约'); 
+            this.addLog(T('部署合约的交易hash:') + txHash);
+            this.checkReceipt(T('部署合约'), txHash, () => {
+              Feedback.toast.success(T('成功部署合约')); 
               this.setState({deployContractVisible: false, txSendVisible: false}); 
               this.processContractDepolyed(this.state.newContractAccountName, contractInfo[1], JSON.parse(contractCode.abi));
             });
           }).catch(error => {
-            this.addLog('部署合约交易发送失败:' + error);
-            Feedback.toast.error('部署合约交易发送失败：' + error);
+            this.addLog(T('部署合约交易发送失败:') + error);
+            Feedback.toast.error(T('部署合约交易发送失败:') + error);
           });
         });
       });
@@ -1412,6 +1421,8 @@ export default class ContractManager extends Component {
                     }
                   </TreeNode>
               </Tree>
+              &nbsp;&nbsp;
+              <a href='https://github.com/unichainplatform/unichain/wiki' target="_blank" rel="noopener noreferrer">{T('开发者Wiki')}</a>
             </Col>
             <Col className="custom-col-content">
               <Tab activeKey={this.state.activeKey} excessMode="slide" onClose={this.onClose.bind(this)} onClick={this.selectTab}>
@@ -1631,7 +1642,8 @@ export default class ContractManager extends Component {
             onChange={this.handleFTAmountChange.bind(this)}
             defaultValue={this.state.ftAmount}
             style={{ width: 300 }}
-            addonBefore={T("转账金额UNI")}
+            addonBefore={T("转账金额")}
+            addonAfter='UNI'
             size="medium"
           />
           <br/>
@@ -1640,7 +1652,7 @@ export default class ContractManager extends Component {
             onChange={this.handleGasPriceChange.bind(this)}
             style={{ width: 300 }}
             addonBefore={T("GAS单价")}
-            addonAfter="Gaft"
+            addonAfter="Gauni"
             size="medium"
             defaultValue={this.state.gasPrice}
             hasLimitHint

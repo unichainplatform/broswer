@@ -552,9 +552,31 @@ function isEqualAddress(addressOne, addressTwo) {
   return checkPrefix(addressOne.toLowerCase()) == checkPrefix(addressTwo.toLowerCase());
 }
 
+function callContractFunc(contractAccountName, funcName, paraTypes, paraValues) {
+  const payload = '0x' + unichain.utils.getContractPayload(funcName, paraTypes, paraValues);
+  const callInfo = {actionType:0, from: 'unichain.founder', to: contractAccountName, assetId:0, gas:200000000, gasPrice:10000000000, value:0, data:payload, remark:''};
+  return unichain.uni.call(callInfo, 'latest');
+}
+
+async function checkURC20(contractAccountName) {
+  let result = await callContractFunc(contractAccountName, 'name', [], []);
+  if (result == '0x') return false;
+  result = await callContractFunc(contractAccountName, 'totalSupply', [], []);
+  if (result == '0x') return false;
+  result = await callContractFunc(contractAccountName, 'decimals', [], []);
+  if (result == '0x') return false;
+  result = await callContractFunc(contractAccountName, 'symbol', [], []);
+  if (result == '0x') return false;
+  result = await callContractFunc(contractAccountName, 'balanceOf', ['address'], [contractAccountName]);
+  if (result == '0x') return false;
+  result = await callContractFunc(contractAccountName, 'allowance', ['address', 'address'], [contractAccountName, contractAccountName]);
+  if (result == '0x') return false;
+  return true;
+}
+
 export { getFlatMenuData, getRouterData, formatterMenuData, hex2Bytes, bytes2Hex, str2Bytes, str2Hex,
          saveTxHash, saveTxBothFromAndTo, bytes2Number, deepClone, parsePrivateKey, checkPassword, 
          isEmptyObj, getPublicKeyWithPrefix, utf8ByteToUnicodeStr, getDataFromFile, storeDataToFile, 
          removeDataFromFile, loadKeystoreFromLS, loadAccountsFromLS, getReadableNumber, confuseInfo, 
          getGasEarned, getValidTime, checkIpVaild, getDuration, guid, getRandomInt,
-         getValidKeystores, storeContractABI, getContractABI, parseResult, checkPrefix, isEqualAddress };
+         getValidKeystores, storeContractABI, getContractABI, parseResult, checkPrefix, isEqualAddress, checkURC20 };

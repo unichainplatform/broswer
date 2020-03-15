@@ -25,6 +25,7 @@ export default class SearchTable extends Component {
       balanceInfosOnePage: [],
       onePageNum: 10,
       assetInfo: [],
+      urc20Visible: 'none',
     };
   }
 
@@ -144,6 +145,10 @@ export default class SearchTable extends Component {
               onChange={this.handlePaginationChange}
               total={this.state.balanceInfos.length}
             />
+          </IceContainer>
+
+          <IceContainer style={{display: this.state.urc20Visible}} title={T('URC20资产')}>
+            
           </IceContainer>
         </IceContainer>
 

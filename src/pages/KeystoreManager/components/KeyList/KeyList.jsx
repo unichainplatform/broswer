@@ -1002,7 +1002,7 @@ export default class KeyList extends Component {
               title={T("生成路径")}
               dataIndex="bip32path"
             />
-            <Table.Column title="操作" width={300} cell={this.renderOperation.bind(this)} />
+            <Table.Column title={T("操作")} width={300} cell={this.renderOperation.bind(this)} />
           </Table>
           <div onClick={this.addNewItem} style={styles.addNewItem}>
             + {T('初始化钱包/新增一对公私钥')}

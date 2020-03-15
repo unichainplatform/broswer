@@ -69,3 +69,225 @@ export const chainId2RPC = {1: {rpcHost: '47.115.136.228', rpcPort: 8080}, 100: 
 export const proxySrvAddr = {1: 'http://47.115.150.104:9000', 100: 'http://47.115.150.104:9001', 200: 'http://47.115.150.104:9002'};
 
 export const ShareCoding = {'ABI' : '[{"constant":false,"inputs":[{"name":"tokenIds","type":"uint256[]"}],"name":"removeAcceptToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"disableShare","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"tokenIds","type":"uint256[]"}],"name":"addAcceptToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_toCoder","type":"address"}],"name":"giveReward","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"sharedAccounts","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"rewardMap","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"acceptTokenMap","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"enableShare","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"sharedAccountMap","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"rewards","outputs":[{"name":"from","type":"address"},{"name":"toCoder","type":"address"},{"name":"tokenId","type":"uint256"},{"name":"amount","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]'};
+export const URC20ABI = [
+  {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+          {
+              "name": "",
+              "type": "string"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "constant": false,
+      "inputs": [
+          {
+              "name": "_spender",
+              "type": "address"
+          },
+          {
+              "name": "_value",
+              "type": "uint256"
+          }
+      ],
+      "name": "approve",
+      "outputs": [
+          {
+              "name": "",
+              "type": "bool"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+          {
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "constant": false,
+      "inputs": [
+          {
+              "name": "_from",
+              "type": "address"
+          },
+          {
+              "name": "_to",
+              "type": "address"
+          },
+          {
+              "name": "_value",
+              "type": "uint256"
+          }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+          {
+              "name": "",
+              "type": "bool"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+          {
+              "name": "",
+              "type": "uint8"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "constant": true,
+      "inputs": [
+          {
+              "name": "_owner",
+              "type": "address"
+          }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+          {
+              "name": "balance",
+              "type": "uint256"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+          {
+              "name": "",
+              "type": "string"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "constant": false,
+      "inputs": [
+          {
+              "name": "_to",
+              "type": "address"
+          },
+          {
+              "name": "_value",
+              "type": "uint256"
+          }
+      ],
+      "name": "transfer",
+      "outputs": [
+          {
+              "name": "",
+              "type": "bool"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+  },
+  {
+      "constant": true,
+      "inputs": [
+          {
+              "name": "_owner",
+              "type": "address"
+          },
+          {
+              "name": "_spender",
+              "type": "address"
+          }
+      ],
+      "name": "allowance",
+      "outputs": [
+          {
+              "name": "",
+              "type": "uint256"
+          }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+  },
+  {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+          },
+          {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+          }
+      ],
+      "name": "Approval",
+      "type": "event"
+  },
+  {
+      "anonymous": false,
+      "inputs": [
+          {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+          },
+          {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+          },
+          {
+              "indexed": false,
+              "name": "value",
+              "type": "uint256"
+          }
+      ],
+      "name": "Transfer",
+      "type": "event"
+  }
+];
