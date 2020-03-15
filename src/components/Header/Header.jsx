@@ -73,7 +73,7 @@ export default class Header extends PureComponent {
     this.setState({customNodeDisabled: value != 'others', nodeInfo: value});
   }
   onConfigNodeOK = () => {
-    const nodeInfo = this.state.nodeInfo.indexOf('http://') == 0 && this.state.nodeInfo.indexOf('https://') == 0 ? this.state.nodeInfo : 'https://' + this.state.nodeInfo;
+    const nodeInfo = (this.state.nodeInfo.indexOf('http://') == 0 || this.state.nodeInfo.indexOf('https://') == 0) ? this.state.nodeInfo : 'https://' + this.state.nodeInfo;
     cookie.save('nodeInfo', nodeInfo, {path: '/', maxAge: 3600 * 24 * 360});
     axios.defaults.baseURL = nodeInfo;
     this.setState({ nodeConfigVisible: false, nodeInfo });
