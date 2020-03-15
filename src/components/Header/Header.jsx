@@ -48,7 +48,7 @@ export default class Header extends PureComponent {
       nodes: [{value: constant.mainNetRPCAddr, label:T('主网：') + constant.mainNetRPCAddr}, 
               {value: constant.testNetRPCAddr1, label:T('测试网1：') + constant.testNetRPCAddr1}, {value: constant.testNetRPCAddr2, label:T('测试网2：') + constant.testNetRPCAddr2},
               {value: constant.LocalRPCAddr, label:T('本地节点：') + constant.LocalRPCAddr}, 
-              {value: 'others', label: T('自定义')}],
+              {value: 'others', label: T('自定义')}, {value: constant.mainNetRPCHttpsAddr, label:T('主网：') + constant.mainNetRPCHttpsAddr}],
     };
     setLang(this.state.defaultLang);
   }

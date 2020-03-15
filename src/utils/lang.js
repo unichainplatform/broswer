@@ -541,6 +541,7 @@ const ch2en = {
   '合约账户创建成功，即将为账户添加合约代码': 'Success to create contract account, next to add contract code for the account',
   '合约账户已创建，可部署合约': 'Contract account has been created, and contract code could be deployed',
   '开发者Wiki': 'Wiki for developer',
+  '配置需连接的节点': "Node Configure",
   }
 
   let isCh = true;
