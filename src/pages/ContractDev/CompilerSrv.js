@@ -1,4 +1,4 @@
-const compileSrvAddr = "http://182.92.108.173:8888";
+const compileSrvAddr = "https://uninet.io";
 let userFileAddr = compileSrvAddr + "/solidity/";
 let libFileAddr = compileSrvAddr + "/libsList/";
 let sampleFileAddr = compileSrvAddr + "/sampleCodeList/";
