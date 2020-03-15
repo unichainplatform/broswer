@@ -45,10 +45,11 @@ export default class Header extends PureComponent {
       customNodeDisabled: true,
       languages: [{value: 'ch', label:'中文'}, {value: 'en', label:'English'}],
       defaultLang: (defaultLang == null || defaultLang == 'ch') ? 'ch' : 'en',
-      nodes: [{value: constant.mainNetRPCAddr, label:T('主网：') + constant.mainNetRPCAddr}, 
-              {value: constant.testNetRPCAddr1, label:T('测试网1：') + constant.testNetRPCAddr1}, {value: constant.testNetRPCAddr2, label:T('测试网2：') + constant.testNetRPCAddr2},
+      nodes: [{value: constant.mainNetRPCHttpsAddr, label:T('主网：') + constant.mainNetRPCHttpsAddr}, 
+              {value: constant.testNetRPCHttpsAddr1, label:T('测试网1：') + constant.testNetRPCHttpsAddr1}, 
+              {value: constant.testNetRPCHttpsAddr2, label:T('测试网2：') + constant.testNetRPCHttpsAddr2},
               {value: constant.LocalRPCAddr, label:T('本地节点：') + constant.LocalRPCAddr}, 
-              {value: 'others', label: T('自定义')}, {value: constant.mainNetRPCHttpsAddr, label:T('主网：') + constant.mainNetRPCHttpsAddr}],
+              {value: 'others', label: T('自定义')}],
     };
     setLang(this.state.defaultLang);
   }

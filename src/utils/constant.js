@@ -59,11 +59,10 @@ export const BlockStatus = { Rollbacked: -1, Irreversible: 0, Reversible: 1, Unk
 export const SysTokenId = 0;
 export const SysTokenDecimal = 18;
 
-export const LocalRPCAddr = 'http://127.0.0.1:8545';
-export const testNetRPCAddr1 = 'http://47.115.150.104:8202';
-export const testNetRPCAddr2 = 'http://47.115.149.93:8080';
-export const mainNetRPCAddr = 'http://47.115.136.228:8080'; 
 export const mainNetRPCHttpsAddr = 'https://www.uninet.io/mainnet/'; 
+export const testNetRPCHttpsAddr1 = 'https://www.uninet.io/testnet1/';
+export const testNetRPCHttpsAddr2 = 'https://www.uninet.io/testnet2/';
+export const LocalRPCAddr = 'http://127.0.0.1:8545';
 
 export const chainId2RPC = {1: {rpcHost: '47.115.136.228', rpcPort: 8080}, 100: {rpcHost: '47.115.149.93', rpcPort: 8080}, 200: {rpcHost: '47.115.150.104', rpcPort: 8202}};
 
