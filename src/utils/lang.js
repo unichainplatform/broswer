@@ -312,6 +312,7 @@ const ch2en = {
   "请输入正确的资产符号":"input correct asset symbol",
   "符号":"symbol",
   "a~z、0~9.组成，2-16位":"a~z,0~9,2~16Bytes",
+  "a~z、0~9组成，2-16位":"a~z,0~9,2~16Bytes",
   "请输入正确金额":"Please input correct value",
   "金额":"value",
   "请输入正确精度":"Please input correct decimals",

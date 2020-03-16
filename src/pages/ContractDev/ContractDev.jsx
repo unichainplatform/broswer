@@ -690,7 +690,10 @@ export default class ContractManager extends Component {
           return;
         }
         const type = this.state.funcParaTypes[contractName][funcName][index];
-        if (type.lastIndexOf(']') === type.length - 1) {
+        if (type == 'bool') {
+          value = (value == 'false' || value == 0) ? false : true;
+          values.push(value);
+        } else if (type.lastIndexOf(']') === type.length - 1) {
           if (value.indexOf('[') != 0 || value.lastIndexOf(']') != value.length - 1) {
             Feedback.toast.error('数组类型的值请按如下格式填写：[a,b,c]');
             return;
@@ -1162,6 +1165,7 @@ export default class ContractManager extends Component {
       const type = this.state.constructorParaTypes[index];
       if (type == 'bool') {
         value = ((value == 'false' || value == 0) ? false : true);
+        values.push(value);
       } else if (type.lastIndexOf(']') === type.length - 1) {
         if (value.indexOf('[') != 0 || value.lastIndexOf(']') != value.length - 1) {
           Message.error(T('数组类型的值请按如下格式填写:' + '[a,b,c]'));
