@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Feedback, Dialog, Select, CascaderSelect, Button } from '@icedesign/base';
+import { Message } from '@alifd/next';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import * as ethUtil from 'ethereumjs-util';
