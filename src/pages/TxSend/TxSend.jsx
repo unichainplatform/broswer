@@ -84,10 +84,15 @@ export default class TxSend extends Component {
       );
     }
     this.state.originalTxInfo = utils.deepClone(nextProps.txInfo);
+    let gasLimit = 1000000;
+    if (nextProps.txInfo.gasLimit != null && nextProps.txInfo.gasLimit > 1000000) {
+      gasLimit = nextProps.txInfo.gasLimit;
+    }
     this.setState({
       actionInfo: nextProps.txInfo,
       txConfirmVisible: nextProps.visible,
       accountSelector: this.state.accountSelector,
+      gasLimit
     });
   }
 
@@ -256,6 +261,7 @@ export default class TxSend extends Component {
           const fatherLevel = this.getSupperAccountLevel(curSignAccount.accountName, actionInfo.accountName);
           unichain.uni.sendSeniorSigTransaction(txInfo, multiSigInfos, fatherLevel).then(txHash => {
             console.log('tx hash=>' + txHash);
+            Message.hide();
             this.processTxSendResult(txInfo, txHash);
             this.onTxConfirmClose();
             if (this.props.sendResult != null) {
@@ -263,6 +269,7 @@ export default class TxSend extends Component {
             }
           }).catch(error => {
             console.log(error);
+            Message.hide();
             Feedback.toast.error('交易发送失败：' + error);
             this.addSendErrorTxToFile(txInfo);
             self.state.txInfo = utils.deepClone(self.state.originalTxInfo);
@@ -272,11 +279,12 @@ export default class TxSend extends Component {
           });
         }
       }).catch(error => {
+        Message.hide();
         console.log(error);
         Feedback.toast.error(error.message);
       });
       
-      Feedback.toast.success('开始发送交易');
+      Message.show({type: 'loading', content: '正在发送交易', duration: 0, hasMask: true});
     }
   };
 
