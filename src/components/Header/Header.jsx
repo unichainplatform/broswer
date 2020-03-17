@@ -67,7 +67,8 @@ export default class Header extends PureComponent {
   onChangeLanguage = (v) => {
     cookie.save('defaultLang', v, {path: '/', maxAge: 3600 * 24 * 360});
     setLang(v);
-    history.push('/');
+    history.go(0);
+//    history.push('/');
   }
   onChangeNode = (type, value) => {
     cookie.save('defaultNode', value, {path: '/', maxAge: 3600 * 24 * 360});

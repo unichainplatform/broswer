@@ -1645,6 +1645,7 @@ export default class AccountList extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
+          <h4 style={styles.title}>{T('账户信息')}</h4>
           <Table language={T('zh-cn')} primaryKey="accountName" dataSource={this.state.accountInfos} hasBorder={false} isLoading={this.state.isLoading}>
             <Table.Column
               width={80}
@@ -1652,12 +1653,12 @@ export default class AccountList extends Component {
               dataIndex="accountID"
             />
             <Table.Column
-              width={80}
+              width={120}
               title={T("账号")}
               dataIndex="accountName"
             />
             <Table.Column
-              width={80}
+              width={120}
               title={T("创建者")}
               dataIndex="founder"
             />
@@ -1677,7 +1678,6 @@ export default class AccountList extends Component {
               dataIndex="number"
             />
             <Table.Column
-              width={80}
               width={80}
               title={T("合约账户")}
               dataIndex="codeSize"
@@ -2131,5 +2131,16 @@ const styles = {
     marginTop: 20,
     cursor: 'pointer',
     textAlign: 'center',
+  },
+  title: {
+    margin: '0',
+    padding: '15px 20px',
+    fonSize: '16px',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    color: 'rgba(0,0,0,.85)',
+    fontWeight: '500',
+    borderBottom: '1px solid #eee',
   },
 };

@@ -983,6 +983,7 @@ export default class KeyList extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
+          <h4 style={styles.title}>{T('密钥信息')}</h4>
           <Table  language={T('zh-cn')} dataSource={this.state.dataSource} hasBorder={false}>
             <Table.Column width={40} title="ID" cell={this.renderOrder} />
             <Table.Column
@@ -1326,5 +1327,16 @@ const styles = {
     marginTop: 20,
     cursor: 'pointer',
     textAlign: 'center',
+  },
+  title: {
+    margin: '0',
+    padding: '15px 20px',
+    fonSize: '16px',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    color: 'rgba(0,0,0,.85)',
+    fontWeight: '500',
+    borderBottom: '1px solid #eee',
   },
 };

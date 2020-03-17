@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AccountList from './components/AccountList';
 import KeystoreManager from '../KeystoreManager';
+import { T } from '../../utils/lang'; 
 
 export default class AccountManager extends Component {
   static displayName = 'AccountManager';
@@ -13,9 +14,8 @@ export default class AccountManager extends Component {
   render() {
     return (
       <div className="accountmanager-page">
-        账户信息: <br/><br/>
         <AccountList />
-        <br/><br/>密钥信息: <br/><br/>
+        <br/><br/>
         <KeystoreManager />
       </div>
     );

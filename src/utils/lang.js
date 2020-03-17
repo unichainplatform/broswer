@@ -550,6 +550,8 @@ const ch2en = {
   '附带转账金额(单位:UNI)': 'Transfer Amount(UNI)',
   '交易确认-': 'Transaction Confirmation-',
   '节点信息(可选)': 'Node Info',
+  '账户信息' : 'Account Info',
+  '密钥信息' : 'Key Info',
   }
 
   let isCh = true;
