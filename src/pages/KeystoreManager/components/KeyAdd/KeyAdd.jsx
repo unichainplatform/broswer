@@ -21,7 +21,7 @@ export default class KeyAdd extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
-          <Table dataSource={this.state.dataSource} hasBorder={false}>
+          <Table  language={T('zh-cn')} dataSource={this.state.dataSource} hasBorder={false}>
             <Table.Column width={80} title="ID" cell={this.renderOrder} />
             <Table.Column
               width={120}
@@ -42,7 +42,7 @@ export default class KeyAdd extends Component {
             + 导入私钥
           </div>
         </IceContainer>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.pwdDialogVisible}
           onOk={this.onOK}
           onCancel={this.onClose}
@@ -62,7 +62,7 @@ export default class KeyAdd extends Component {
             onPressEnter={this.onOK}
           />
         </Dialog>  
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.msgVisible}
           title="通知"
           footerActions='ok'
@@ -74,7 +74,7 @@ export default class KeyAdd extends Component {
         >
           {this.state.msgContent}
         </Dialog>  
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.newPwdDialogVisible}
           onOk={this.onChangePwdOK}
           onCancel={this.onChangePwdClose}
@@ -107,7 +107,7 @@ export default class KeyAdd extends Component {
             onPressEnter={this.onChangePwdOK}
           />
         </Dialog>  
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.importKeyDialogVisible}
           onOk={this.onImportKeyOK}
           onCancel={this.onImportKeyClose}

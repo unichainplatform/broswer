@@ -983,7 +983,7 @@ export default class KeyList extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
-          <Table dataSource={this.state.dataSource} hasBorder={false}>
+          <Table  language={T('zh-cn')} dataSource={this.state.dataSource} hasBorder={false}>
             <Table.Column width={40} title="ID" cell={this.renderOrder} />
             <Table.Column
               width={120}
@@ -1020,7 +1020,7 @@ export default class KeyList extends Component {
             * {T('修改密码')}
           </div>
         </IceContainer>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.pwdDialogVisible}
           onOk={this.onPwdOK.bind(this)}
           onCancel={this.onClose}
@@ -1041,7 +1041,7 @@ export default class KeyList extends Component {
             onPressEnter={this.onPwdOK.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.msgVisible}
           title={this.state.msgTitle != null ? this.state.msgTitle : T('通知')}
           footerActions="ok"
@@ -1056,7 +1056,7 @@ export default class KeyList extends Component {
             value={this.state.msgContent}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.newPwdDialogVisible}
           onOk={this.onChangePwdOK}
           onCancel={this.onChangePwdClose}
@@ -1105,7 +1105,7 @@ export default class KeyList extends Component {
             onPressEnter={this.onChangePwdOK}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.importKeyDialogVisible}
           onOk={this.onImportKeyOK}
           onCancel={this.onImportKeyClose}
@@ -1125,7 +1125,7 @@ export default class KeyList extends Component {
             onPressEnter={this.onImportKeyOK}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.importMnemonicDialogVisible}
           onOk={this.onImportMnemonicOK}
           onCancel={this.onImportMnemonicClose}
@@ -1168,7 +1168,7 @@ export default class KeyList extends Component {
             onPressEnter={this.onImportMnemonicOK}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.importKeystoreDialogVisible}
           onOk={this.onImportKeystoreOK}
           onCancel={this.onImportKeystoreClose}
@@ -1202,7 +1202,7 @@ export default class KeyList extends Component {
           <p />
           {T("此Keystore信息导入后，将会由本地钱包重新加密成新的keystore保存，但私钥会保持一致")}
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.mnemonicVisible}
           title={T("助记词")}
           footer={footerOne}
@@ -1219,7 +1219,7 @@ export default class KeyList extends Component {
           <p />
           {T("此处请务必保存好助记词")}
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.reMnemonicVisible}
           title={T("请输入上一步显示的助记词(顺序必须一致)")}
           footer={footerTwo}
@@ -1237,7 +1237,7 @@ export default class KeyList extends Component {
           <p />
           <TagGroup>{this.state.mnemonicWordTagList}</TagGroup>
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.signVisible}
           title={T("签名/验签交易")}
           footer={signFooter}
@@ -1271,7 +1271,7 @@ export default class KeyList extends Component {
             onChange={this.onSignAddrChange.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.cryptoVisible}
           title={T("加/解密信息")}
           footer={cryptoFooter}
@@ -1297,7 +1297,7 @@ export default class KeyList extends Component {
             onChange={this.onCryptoResultChange.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.chainIdVisible}
           title={T("选择ChainId")}
           footerAlign="center"

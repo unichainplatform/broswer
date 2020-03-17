@@ -139,7 +139,7 @@ export default class AssetIncrease extends Component {
             <Row style={styles.formRow} justify="center">
                         {T('待增发的资产')}:
               <IceFormBinder required message="Required!">
-                <Select
+                <Select language={T('zh-cn')}
                   placeholder={T("选择需要增发的资产ID")}
                   dataSource={this.state.assetInfoSet}
                   name="assetId"

@@ -176,7 +176,7 @@ export default class Header extends PureComponent {
           className="ice-design-layout-header-menu"
           style={{ display: 'flex' }}
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 100 }}
             placeholder={T("语言")}
             onChange={this.onChangeLanguage.bind(this)}
@@ -190,7 +190,7 @@ export default class Header extends PureComponent {
           </Balloon>
           &nbsp;&nbsp;
           <Button type="primary" className="btrigger" onClick={() => history.push('/AccountManager')}><Icon type="account" />{T('账号管理')}</Button>
-          <Dialog
+          <Dialog language={T('zh-cn')}
             visible={this.state.nodeConfigVisible}
             title={T("配置需连接的节点")}
             footerActions="ok"
@@ -200,7 +200,7 @@ export default class Header extends PureComponent {
             onCancel={() => this.setState({ nodeConfigVisible: false })}
             onClose={() => this.setState({ nodeConfigVisible: false })}
           >
-            <Select
+            <Select language={T('zh-cn')}
                 style={{ width: 400 }}
                 placeholder={T("选择节点")}
                 onChange={this.onChangeNode.bind(this, 'nodeInfo')}

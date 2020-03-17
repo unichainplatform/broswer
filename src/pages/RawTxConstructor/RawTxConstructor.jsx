@@ -939,7 +939,7 @@ export default class RawTxConstructor extends Component {
         <Button type="primary" onClick={this.parseUri.bind(this)}>解析URI</Button>
         <br />
         <br />
-        <Select
+        <Select language={T('zh-cn')}
             style={styles.otherElement}
             placeholder="选择交易类型"
             onChange={this.onChangeTxType.bind(this)}
@@ -996,7 +996,7 @@ export default class RawTxConstructor extends Component {
             onChange={this.handleActionElementChange.bind(this, 'amount')}
           />
           &nbsp;&nbsp;
-          <Select
+          <Select language={T('zh-cn')}
             style={{width:150}}
             placeholder="补足0️个数"
             onChange={this.onChangeZeroNumType.bind(this)}
@@ -1131,7 +1131,7 @@ export default class RawTxConstructor extends Component {
           />
           <br />
           <br />
-          <Select
+          <Select language={T('zh-cn')}
             style={styles.halfElement}
             placeholder="选择此交易预期结果"
             onChange={this.onChangeResultType.bind(this)}
@@ -1160,7 +1160,7 @@ export default class RawTxConstructor extends Component {
           <br />
           <br />
           <br />
-          <Select
+          <Select language={T('zh-cn')}
             style={{width: 250}}
             placeholder="请选择get方法"
             onChange={this.onChangeGetMethod.bind(this)}
@@ -1197,7 +1197,7 @@ export default class RawTxConstructor extends Component {
           <br />
           <br />
           <br />
-          <Select
+          <Select language={T('zh-cn')}
             style={{width: 250}}
             placeholder="请选择check方法"
             onChange={this.onChangeCheckMethod.bind(this)}
@@ -1213,7 +1213,7 @@ export default class RawTxConstructor extends Component {
             onChange={this.onChangeCheckArguments.bind(this)}
           />
           &nbsp;&nbsp;
-          <Select
+          <Select language={T('zh-cn')}
             style={{width: 180}}
             placeholder="选择此check预期结果"
             onChange={this.onChangeCheckExpectResult.bind(this)}

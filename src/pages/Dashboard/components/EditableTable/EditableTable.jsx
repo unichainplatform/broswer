@@ -80,7 +80,7 @@ export default class EditableTable extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
-          <Table dataSource={this.state.dataSource} hasBorder={false}>
+          <Table language={T('zh-cn')} dataSource={this.state.dataSource} hasBorder={false}>
             <Table.Column width={80} title="顺序" cell={this.renderOrder} />
             <Table.Column
               width={280}

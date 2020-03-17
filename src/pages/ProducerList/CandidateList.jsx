@@ -564,7 +564,7 @@ export default class CandidateList extends Component {
             &nbsp;&nbsp;
             <b>{T('当前周期')}:{this.state.curEpoch}, {T('一个周期时长')}:{this.state.duration}</b>
         </p>
-        <Table primaryKey="name"
+        <Table primaryKey="name" language={T('zh-cn')}
           dataSource={this.state.producerList}
           rowSelection={this.state.rowSelection}
           onSort={this.onSort.bind(this)}
@@ -586,7 +586,7 @@ export default class CandidateList extends Component {
         <Icon type="account" style={{ color: '#FF3333', marginRight: '10px' }} />--{T("我的节点")}
         &nbsp;&nbsp;&nbsp;&nbsp;
         <Icon type="atm-away" style={{ color: '#FF3333', marginRight: '10px' }} />--{T("备选节点")}
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.voteVisible}
           title={T("投票")}
           footerActions={['ok', 'cancel']}
@@ -596,7 +596,7 @@ export default class CandidateList extends Component {
           onCancel={this.onVoteClose.bind(this)}
           onClose={this.onVoteClose.bind(this)}
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择您可投票的账户")}
             onChange={this.onAccountChange.bind(this)}
@@ -618,7 +618,7 @@ export default class CandidateList extends Component {
           />
         </Dialog>
 
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.registerProducerVisible}
           title={T("注册候选者")}
           footerActions={['ok', 'cancel']}
@@ -628,7 +628,7 @@ export default class CandidateList extends Component {
           onCancel={this.onRegisterProducerClose.bind(this)}
           onClose={this.onRegisterProducerClose.bind(this)}
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择待注册为候选者的账户")}
             onChange={this.onProducerChange.bind(this)}
@@ -660,7 +660,7 @@ export default class CandidateList extends Component {
             onPressEnter={this.onRegisterProducerOK.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.updateProducerVisible}
           title={T("更新候选者")}
           footerActions={['ok', 'cancel']}

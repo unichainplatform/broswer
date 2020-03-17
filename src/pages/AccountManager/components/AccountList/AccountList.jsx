@@ -1645,7 +1645,7 @@ export default class AccountList extends Component {
     return (
       <div className="editable-table">
         <IceContainer>
-          <Table primaryKey="accountName" dataSource={this.state.accountInfos} hasBorder={false} isLoading={this.state.isLoading}>
+          <Table language={T('zh-cn')} primaryKey="accountName" dataSource={this.state.accountInfos} hasBorder={false} isLoading={this.state.isLoading}>
             <Table.Column
               width={80}
               title="ID"
@@ -1695,7 +1695,7 @@ export default class AccountList extends Component {
             + {T('导入账户')}
           </div>
         </IceContainer>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.selfCreateAccountVisible}
           onOk={this.onSelfCreateAccountOK.bind(this)}
           onCancel={this.onSelfCreateAccountClose.bind(this)}
@@ -1703,7 +1703,7 @@ export default class AccountList extends Component {
           title={T("账户创建")}
           footerAlign="center"
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择您拥有的账户(此账户用于创建新账户)")}
             onChange={this.onChangeCreatorAccount.bind(this)}
@@ -1719,12 +1719,12 @@ export default class AccountList extends Component {
             defaultValue=""
             maxLength={50}
             hasLimitHint
-            placeholder={T("字母开头,由a-z0-9.组成,一级12~16位,二三级皆2~16位")}
+            placeholder={T("字母开头,由a-z0-9组成,12~16位")}
           />
           <br />
           <br />
 
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择绑定本地已有公钥或在下面输入其它公钥")}
             onChange={this.handleSelfPublicKeyChange.bind(this)}
@@ -1777,7 +1777,7 @@ export default class AccountList extends Component {
             placeholder={T("创建新账号的同时，可向此账号转账，默认为0")}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.proxyCreateAccountVisible}
           onOk={this.onProxyCreateAccountOK.bind(this)}
           onCancel={this.onProxyCreateAccountClose.bind(this)}
@@ -1806,7 +1806,7 @@ export default class AccountList extends Component {
             hasLimitHint
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.bindNewAuthorVisible}
           onOk={this.onBindNewAuthorOK.bind(this)}
           onCancel={this.onBindNewAuthorClose.bind(this)}
@@ -1835,7 +1835,7 @@ export default class AccountList extends Component {
           />
         </Dialog>
 
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.modifyThresholdVisible}
           onOk={this.onModifyThresholdOK.bind(this)}
           onCancel={this.onModifyThresholdClose.bind(this)}
@@ -1843,7 +1843,7 @@ export default class AccountList extends Component {
           title={T("修改阈值")}
           footerAlign="center"
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择阈值类型")}
             onChange={this.onChangeThresholdType.bind(this)}
@@ -1860,7 +1860,7 @@ export default class AccountList extends Component {
           />
         </Dialog>
 
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.updateWeightVisible}
           onOk={this.onUpdateWeightOK.bind(this)}
           onCancel={this.onUpdateWeightClose.bind(this)}
@@ -1875,7 +1875,7 @@ export default class AccountList extends Component {
             inputWidth={"350px"} 
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.withdrawTxFeeVisible}
           onOk={this.onWithdrawTxFeeOK.bind(this)}
           onCancel={this.onWithdrawTxFeeClose.bind(this)}
@@ -1884,7 +1884,7 @@ export default class AccountList extends Component {
           footerAlign="center"
           footer={this.state.withdrawFooter}
         >
-          <Select
+          <Select language={T('zh-cn')}
             style={{ width: 400 }}
             placeholder={T("选择手续费类型")}
             onChange={this.onChangeTxFeeTypeAccount.bind(this)}
@@ -1903,7 +1903,7 @@ export default class AccountList extends Component {
           <p />
           {this.state.txFeeInfo}
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.importAccountVisible}
           title={T("导入账户")}
           footerActions="ok"
@@ -1924,7 +1924,7 @@ export default class AccountList extends Component {
             onPressEnter={this.onImportAccountOK.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           style={{ width: 600 }}
           visible={this.state.authorListVisible}
           title={T("权限管理")}
@@ -1938,7 +1938,7 @@ export default class AccountList extends Component {
         >
           <div className="editable-table">
             <IceContainer>
-              <Table primaryKey="owner" dataSource={this.state.authorList} hasBorder={false} resizable>
+              <Table language={T('zh-cn')} primaryKey="owner" dataSource={this.state.authorList} hasBorder={false} resizable>
                 <Table.Column title={T("所有者")} dataIndex="owner" width={100} cell={this.renderOwner.bind(this)}/>
                 <Table.Column title={T("权重")} dataIndex="weight" width={100} />
                 <Table.Column title={T("当前状态")} dataIndex="status" width={100} cell={this.renderStatus.bind(this)}/>
@@ -1970,8 +1970,8 @@ export default class AccountList extends Component {
           </div>
         </Dialog>
 
-        <Dialog
-          style={{ width: 450 }}
+        <Dialog language={T('zh-cn')}
+          style={{ width: 550 }}
           visible={this.state.assetVisible}
           title={T("资产信息")}
           footerActions="ok"
@@ -1983,7 +1983,7 @@ export default class AccountList extends Component {
         >
           <div className="editable-table">
             <IceContainer>
-              <Table primaryKey="assetID" dataSource={this.state.balanceInfos} hasBorder={false} resizable>
+              <Table language={T('zh-cn')} primaryKey="assetID" dataSource={this.state.balanceInfos} hasBorder={false} resizable>
                 <Table.Column title={T("资产ID")} dataIndex="assetID" width={100} />
                 <Table.Column title={T("资产符号")} dataIndex="assetID" width={100} cell={this.symbolRender.bind(this)} />
                 <Table.Column title={T("可用金额")} dataIndex="balance" width={100} cell={this.balanceRender.bind(this)} />
@@ -1993,7 +1993,7 @@ export default class AccountList extends Component {
           </div>
         </Dialog>
 
-        <Dialog
+        <Dialog language={T('zh-cn')}
           style={{ width: 1200 }}
           visible={this.state.txVisible}
           title={T("交易信息")}
@@ -2007,7 +2007,7 @@ export default class AccountList extends Component {
         >
           <div className="editable-table">
             <IceContainer>
-              <Table fixedHeader primaryKey="date" dataSource={this.state.txInfos} hasBorder={false} resizable onSort={this.onSort.bind(this)} isZebra={true}>
+              <Table language={T('zh-cn')} fixedHeader primaryKey="date" dataSource={this.state.txInfos} hasBorder={false} resizable onSort={this.onSort.bind(this)} isZebra={true}>
                 <Table.Column title={T("时间")} dataIndex="date" width={65} cell={this.renderDate.bind(this)} sortable />
                 <Table.Column title={T("交易Hash")} dataIndex="txHash" width={60} cell={this.renderHash.bind(this)} />
                 <Table.Column title={T("交易状态")} dataIndex="txStatus" width={50} cell={this.renderTxStatus.bind(this)} />
@@ -2025,7 +2025,7 @@ export default class AccountList extends Component {
             </IceContainer>
           </div>
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           style={{ width: 800 }}
           visible={this.state.innerTxVisible}
           title={T("内部交易信息")} 
@@ -2038,7 +2038,7 @@ export default class AccountList extends Component {
         >
           <div className="editable-table">
             <IceContainer>
-              <Table dataSource={this.state.innerTxInfos} hasBorder={false} resizable>
+              <Table language={T('zh-cn')} dataSource={this.state.innerTxInfos} hasBorder={false} resizable>
                 <Table.Column title={T("类型")}  dataIndex="actionType" width={80} />
                 <Table.Column title={T("发起账号")}  dataIndex="fromAccount" width={100} />
                 <Table.Column title={T("接收账号")}  dataIndex="toAccount" width={80} />
@@ -2049,7 +2049,7 @@ export default class AccountList extends Component {
             </IceContainer>
           </div>
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.transferVisible}
           title={T("转账信息")}
           footerActions="ok"
@@ -2080,7 +2080,7 @@ export default class AccountList extends Component {
             hasLimitHint
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.contractInfoVisible}
           title={T("本地添加合约ABI信息")}
           footerActions="ok"
@@ -2099,7 +2099,7 @@ export default class AccountList extends Component {
             hasLimitHint
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.contractByteCodeVisible}
           title={T("设置合约byteCode")}
           footerActions="ok"

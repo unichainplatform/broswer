@@ -47,7 +47,7 @@ export default class InfoDisplayTable extends Component {
     return (
       <div className="info-display-table" style={styles.infoDisplayTable}>
         <IceContainer>
-          <Table dataSource={dataSource()}>
+          <Table  language={T('zh-cn')} dataSource={dataSource()}>
             <Table.Column title="个人信息" dataIndex="label" />
             <Table.Column title="" dataIndex="value" />
           </Table>

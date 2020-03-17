@@ -659,14 +659,14 @@ export default class RawTxConstructor extends Component {
         <Button type="primary" onClick={this.saveStep.bind(this)}>保存步骤详情</Button>
         <br />
         <br />
-        <Select
+        <Select language={T('zh-cn')}
           style={{width: '300px'}}
           placeholder="测试场景列表"
           dataSource={this.state.sceneTestCaseNames}
           onChange={this.onChangeTestScene.bind(this)}
         />
         &nbsp;&nbsp;&nbsp;&nbsp;
-        <Select
+        <Select language={T('zh-cn')}
           style={{width: '440px'}}
           placeholder="详细步骤列表"
           onChange={this.onChangeTestStep.bind(this)}
@@ -700,7 +700,7 @@ export default class RawTxConstructor extends Component {
         />
         <br />
         <br />
-        <Select
+        <Select language={T('zh-cn')}
           style={styles.otherElement}
           placeholder="不符合预期的测试场景列表"
           dataSource={this.state.nonPredictTestScenes}

@@ -132,7 +132,7 @@ export default class SearchTable extends Component {
           </IceContainer>
 
           <IceContainer>
-            <Table
+            <Table language={T('zh-cn')}
               dataSource={this.state.balanceInfosOnePage}
               hasBorder={false}
               style={{ padding: '0 20px 20px' }}
@@ -168,7 +168,7 @@ export default class SearchTable extends Component {
           </IceContainer>
 
           <IceContainer>
-            <Table
+            <Table language={T('zh-cn')}
               dataSource={this.state.assetInfo}
               hasBorder={false}
               style={{ padding: '0 20px 20px' }}

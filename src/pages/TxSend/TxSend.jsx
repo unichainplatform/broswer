@@ -8,6 +8,7 @@ import * as EthCrypto from 'eth-crypto';
 import * as unichain from 'unichain-web3';
 import * as utils from '../../utils/utils';
 import * as Constant from '../../utils/constant';
+import { T } from '../../utils/lang';
 
 
 export default class TxSend extends Component {
@@ -67,7 +68,7 @@ export default class TxSend extends Component {
     this.state.accountSelector = [];
     this.state.accounts = [];
     if (!utils.isEmptyObj(nextProps.accountName)) {
-      unichain.account.getAccountByName(nextProps.accountName).then(account => this.state.curAccount = account);
+      this.state.curAccount = await unichain.account.getAccountByName(nextProps.accountName);
       this.addSuperAccount(nextProps.accountName);
     } else {
       //const self = this;
@@ -76,9 +77,9 @@ export default class TxSend extends Component {
         this.state.accounts.push(account.accountName);
       }
       this.state.accountSelector.push([
-        <Select
+        <Select language={T('zh-cn')}
           style={{ width: 400 }}
-          placeholder="选择交易发送方"
+          placeholder={T("选择交易发送方")}
           onChange={this.onChangeAccount.bind(this)}
           dataSource={this.state.accounts}
         />, <br/>, <br/>]
@@ -111,9 +112,9 @@ export default class TxSend extends Component {
     if (this.state.superAccounts.length > 0) {
       this.state.superAccounts.push(accountName);
       this.state.superAccountSelector.push([
-        <Select
+        <Select language={T('zh-cn')}
           style={{ width: 400 }}
-          placeholder="选择需要对交易进行签名的账户"
+          placeholder={T("选择需要对交易进行签名的账户")}
           onChange={this.onChangeSuperAccount.bind(this)}
           dataSource={this.state.superAccounts}
         />, <br/>, <br/>]
@@ -136,22 +137,22 @@ export default class TxSend extends Component {
   }
   onTxConfirmOK = () => {
     if (this.state.curAccount == null) {
-      Feedback.toast.error('内部错误：未传入交易账户信息');
+      Feedback.toast.error(T('内部错误：未传入交易账户信息'));
       return;
     }
 
     if (this.state.gasPrice == '') {
-      Feedback.toast.error('请输入GAS单价');
+      Feedback.toast.error(T('请输入GAS单价'));
       return;
     }
 
     if (this.state.gasLimit == '') {
-      Feedback.toast.error('请输入愿意支付的最多GAS数量');
+      Feedback.toast.error(T('请输入愿意支付的最多GAS数量'));
       return;
     }
 
     if (this.state.password == '') {
-      Feedback.toast.error('请输入钱包密码');
+      Feedback.toast.error(T('请输入钱包密码'));
       return;
     }
 
@@ -166,7 +167,7 @@ export default class TxSend extends Component {
     const gasValue = new BigNumber(this.state.gasPrice).multipliedBy(this.state.gasLimit).shiftedBy(9);
     const maxValue = new BigNumber(curAccountFTBalance);
     if (gasValue.comparedTo(maxValue) > 0) {
-      Feedback.toast.error('余额不足以支付gas费用');
+      Feedback.toast.error(T('余额不足以支付gas费用'));
       return;
     }
     if (this.state.actionInfo.assetId === this.state.sysTokenID) {
@@ -174,7 +175,7 @@ export default class TxSend extends Component {
       const valueAddGasFee = value.plus(gasValue);
 
       if (valueAddGasFee.comparedTo(maxValue) > 0) {
-        Feedback.toast.error('余额不足');
+        Feedback.toast.error(T('余额不足'));
         return;
       }
     }
@@ -214,10 +215,10 @@ export default class TxSend extends Component {
         if(this.state.accountReg.test(author.owner)) {
           const account = await unichain.account.getAccountByName(author.owner);
           const threshold = (actionInfo.actionType === Constant.UPDATE_ACCOUNT_AUTHOR) ? account.updateAuthorThreshold : account.threshold;
-          this.state.multiSignData.push({originalValue: author.owner, label: author.owner + '(权重:' + author.weight + ',权限阈值:' + threshold + ')', value: index + '', accountName: author.owner });
+          this.state.multiSignData.push({originalValue: author.owner, label: author.owner + T('(权重:') + author.weight + T(',权限阈值:') + threshold + ')', value: index + '', accountName: author.owner });
         } else {
           const labelInfo = author.owner.substr(0, 6) + '...' + author.owner.substr(author.owner.length - 4);
-          this.state.multiSignData.push({originalValue: author.owner, label: labelInfo + '(权重:' + author.weight + ')', value: index + '', isLeaf: true });
+          this.state.multiSignData.push({originalValue: author.owner, label: labelInfo + T('(权重:') + author.weight + ')', value: index + '', isLeaf: true });
         }
         index++;
       })
@@ -251,7 +252,7 @@ export default class TxSend extends Component {
             }
           }).catch(error => {
             console.log(error);
-            Feedback.toast.error('交易发送失败：' + error);
+            Feedback.toast.error(T('交易发送失败：') + error);
             this.addSendErrorTxToFile(txInfo);
             self.state.txInfo = utils.deepClone(self.state.originalTxInfo);
             if (this.props.sendResult != null) {
@@ -271,7 +272,7 @@ export default class TxSend extends Component {
           }).catch(error => {
             console.log(error);
             Message.hide();
-            Feedback.toast.error('交易发送失败：' + error);
+            Feedback.toast.error(T('交易发送失败：') + error);
             this.addSendErrorTxToFile(txInfo);
             self.state.txInfo = utils.deepClone(self.state.originalTxInfo);
             if (this.props.sendResult != null) {
@@ -285,7 +286,7 @@ export default class TxSend extends Component {
         Feedback.toast.error(error.message);
       });
       
-      Message.show({type: 'loading', content: '正在发送交易', duration: 0, hasMask: true});
+      Message.show({type: 'loading', content: T('正在发送交易'), duration: 0, hasMask: true});
     }
   };
 
@@ -331,12 +332,12 @@ export default class TxSend extends Component {
 
   processTxSendResult = (txInfo, txHash) => {
     if (txHash != null) {
-      Feedback.toast.success('交易发送成功');
+      Feedback.toast.success(T('交易发送成功'));
 
       txInfo.txHash = txHash;
       this.addSendSuccessTxToFile(txInfo);
     } else {
-      Feedback.toast.error('交易发送失败');
+      Feedback.toast.error(T('交易发送失败'));
       this.addSendErrorTxToFile(txInfo);
     }
   }
@@ -465,7 +466,7 @@ export default class TxSend extends Component {
       }
     }).catch(error => {
       console.log(error);
-      Feedback.toast.error('交易发送失败：' + error);
+      Feedback.toast.error(T('交易发送失败：') + error);
       this.addSendErrorTxToFile(txInfo);
       self.state.txInfo = utils.deepClone(self.state.originalTxInfo);
       if (this.props.sendResult != null) {
@@ -481,7 +482,7 @@ export default class TxSend extends Component {
     this.setState({signInfo: this.state.signInfo});
   }
   signBySelf = (indexes, keystore) => {
-    Feedback.toast.success('开始计算签名');
+    Feedback.toast.success(T('开始计算签名'));
     ethers.Wallet.fromEncryptedJson(JSON.stringify(keystore), this.state.password).then(wallet => {
       unichain.uni.signTx(JSON.parse(this.state.txToBeSigned), wallet.privateKey).then(signature => {
         Feedback.toast.hide();
@@ -498,9 +499,9 @@ export default class TxSend extends Component {
     const signature = this.state.signInfo[indexes];
     unichain.uni.recoverSignedTx(JSON.parse(this.state.txToBeSigned), signature).then(signer => {
       if (signer.toLowerCase() == address.toLowerCase()) {
-        Feedback.toast.success('验证通过');
+        Feedback.toast.success(T('验证通过'));
       } else {
-        Feedback.toast.error('验证失败');
+        Feedback.toast.error(T('验证失败'));
       }
     });
   }
@@ -548,10 +549,10 @@ export default class TxSend extends Component {
       const multiFatherIndexesStr = multiFatherIndexes.join('.');
       this.state.multiSignInputs.push(
         <br />,<br />,
-        addOnBeforeInput + '的签名:',<br />,
+        addOnBeforeInput + T('的签名:'),<br />,
         <Input id={multiFatherIndexesStr} hasClear
           style={{width: 400}}
-          addonBefore='签名'
+          addonBefore={T('签名')}
           size="medium"
           value={this.state.signInfo[multiFatherIndexesStr]}
           onChange={this.handleElementChange.bind(this, multiFatherIndexesStr)}/>
@@ -559,12 +560,12 @@ export default class TxSend extends Component {
       if (bSignBySelf) {
         this.state.multiSignInputs.push(
           <view>&nbsp;&nbsp;</view>,
-          <Button type="primary" onClick={this.signBySelf.bind(this, multiFatherIndexesStr, curKeystore)}>自己签名</Button>
+          <Button type="primary" onClick={this.signBySelf.bind(this, multiFatherIndexesStr, curKeystore)}>{T('自己签名')}</Button>
         );
       } else {
         this.state.multiSignInputs.push(
           <view>&nbsp;&nbsp;</view>,
-          <Button type="primary" onClick={this.verifySign.bind(this, multiFatherIndexesStr, lastOwner)}>验证签名</Button>
+          <Button type="primary" onClick={this.verifySign.bind(this, multiFatherIndexesStr, lastOwner)}>{T('验证签名')}</Button>
         );
       }
     });
@@ -591,10 +592,10 @@ export default class TxSend extends Component {
       for (let author of account.authors) {
         if(this.state.accountReg.test(author.owner)) {
           const newAccount = await unichain.account.getAccountByName(author.owner);
-          curUpdateData.children.push({originalValue: author.owner, label: author.owner + '(权重:' + author.weight + ',权限阈值:' + newAccount.threshold + ')', value: fatherIndex + '.' + index, accountName: author.owner });
+          curUpdateData.children.push({originalValue: author.owner, label: author.owner + T('(权重:') + author.weight + T(',权限阈值:') + newAccount.threshold + ')', value: fatherIndex + '.' + index, accountName: author.owner });
         } else {
           const labelInfo = author.owner.substr(0, 6) + '...' + author.owner.substr(author.owner.length - 4);
-          curUpdateData.children.push({originalValue: author.owner, label: labelInfo + '(权重:' + author.weight + ')', value: fatherIndex + '.' + index, isLeaf: true });
+          curUpdateData.children.push({originalValue: author.owner, label: labelInfo + T('(权重:') + author.weight + ')', value: fatherIndex + '.' + index, isLeaf: true });
         }
         index++;
       }
@@ -606,9 +607,9 @@ export default class TxSend extends Component {
     this.updateMultiSignInputs();
     return (
       <div>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.txConfirmVisible}
-          title={"交易确认-" + (this.state.curAccount != null ? this.state.curAccount.accountName : '')}
+          title={T("交易确认-") + (this.state.curAccount != null ? this.state.curAccount.accountName : '')}
           footerActions="ok"
           footerAlign="center"
           closeable="true"
@@ -621,10 +622,10 @@ export default class TxSend extends Component {
           <Input hasClear
             onChange={this.handleGasPriceChange.bind(this)}
             style={{ width: 400 }}
-            addonBefore="GAS单价"
-            addonAfter="Gauni"
+            addonBefore={T("GAS单价")}
+            addonAfter={T("Gauni")}
             size="medium"
-            placeholder={`建议值：${this.state.suggestionPrice}`}
+            placeholder={T('建议值') + `：${this.state.suggestionPrice}`}
             hasLimitHint
             defaultValue={this.state.gasPrice}
           />
@@ -635,7 +636,7 @@ export default class TxSend extends Component {
           <Input hasClear
             onChange={this.handleGasLimitChange.bind(this)}
             style={{ width: 400 }}
-            addonBefore="GAS数量上限"
+            addonBefore={T("GAS数量上限")}
             size="medium"
             hasLimitHint
             defaultValue={this.state.gasLimit}
@@ -645,7 +646,7 @@ export default class TxSend extends Component {
           <Input hasClear
             onChange={this.handleRemarkChange.bind(this)}
             style={{ width: 400 }}
-            addonBefore="备注信息"
+            addonBefore={T("备注信息")}
             size="medium"
             hasLimitHint
           />
@@ -655,16 +656,16 @@ export default class TxSend extends Component {
             htmlType="password"
             onChange={this.handlePasswordChange.bind(this)}
             style={{ width: 400 }}
-            addonBefore="钱包密码"
+            addonBefore={T("钱包密码")}
             size="medium"
             value={this.state.password}
             maxLength={20}
             hasLimitHint
             onPressEnter={this.onTxConfirmOK.bind(this)}
           />
-          <Dialog
+          <Dialog language={T('zh-cn')}
             visible={this.state.multiSignVisible}
-            title={"获取多签名数据"}
+            title={T("获取多签名数据")}
             footerActions="ok"
             footerAlign="center"
             closeable="true"
@@ -675,14 +676,14 @@ export default class TxSend extends Component {
             <Input multiple
               rows="3"
               style={{ width: 500 }}
-              addonBefore="待签名的交易内容:"
+              addonBefore={T("待签名的交易内容:")}
               size="medium"
               value={this.state.txToBeSigned}
             />
             <br />
             <br />
             <CascaderSelect multiple hasClear
-              placeholder="请选择需要对本交易进行签名的各方"
+              placeholder={T("请选择需要对本交易进行签名的各方")}
               style={{ width: 500 }}
               canOnlyCheckLeaf={true}
               changeOnSelect={false}

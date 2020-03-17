@@ -35,6 +35,7 @@ const ch2en = {
   "合约的发行者":"Contract issuer",
   "分到":"get",
   "设置":"Setting",
+  '设置ABI':'Set ABI',
   "添加合约代码":"Add Contract Code",
   "解除绑定":"Unbind",
   "资产/转账":"Asset/Transfer",
@@ -543,6 +544,12 @@ const ch2en = {
   '合约账户已创建，可部署合约': 'Contract account has been created, and contract code could be deployed',
   '开发者Wiki': 'Wiki for developer',
   '配置需连接的节点': "Node Configure",
+  '区块原始信息': 'Block',
+  'zh-cn': 'en-us',
+  "字母开头,由a-z0-9组成,12~16位": 'Letter beginning, a-z0-9, 12-16 characters',
+  '附带转账金额(单位:UNI)': 'Transfer Amount(UNI)',
+  '交易确认-': 'Transaction Confirmation-',
+  '节点信息(可选)': 'Node Info',
   }
 
   let isCh = true;

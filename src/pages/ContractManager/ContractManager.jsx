@@ -328,7 +328,7 @@ export default class ContractManager extends Component {
         {/* <ContractEditor style={{height:800, width:800}}/>
         <br />
         <br /> */}
-        <Select
+        <Select language={T('zh-cn')}
             style={{ width: 800 }}
             placeholder={T("选择发起合约调用的账户")}
             onChange={this.onChangeAccount.bind(this)}

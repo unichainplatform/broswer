@@ -7,16 +7,16 @@ export default class Logo extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      networkType: '私网',
+      networkType: T('私网'),
     };
   }
   componentDidMount = () => {
     unichain.uni.getChainConfig().then(chainConfig => {
-      let networkType = '私网';
+      let networkType = T('私网');
       if (chainConfig.chainId == 1) {
-        networkType = '主网';
+        networkType = T('主网');
       } else if (chainConfig.chainId >= 100 && chainConfig.chainId <= 200) {
-        networkType = '测试网';
+        networkType = T('测试网');
       }
       this.setState({networkType});
     })

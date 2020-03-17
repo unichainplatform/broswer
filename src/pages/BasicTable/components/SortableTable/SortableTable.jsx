@@ -81,7 +81,7 @@ export default class SortableTable extends Component {
     return (
       <div className="sortable-table" style={styles.sortableTable}>
         <IceContainer>
-          <Table dataSource={this.state.dataSource} hasBorder={false}>
+          <Table language={T('zh-cn')} dataSource={this.state.dataSource} hasBorder={false}>
             <Table.Column width={80} title="顺序" cell={this.renderOrder} />
             <Table.Column width={280} title="待办事项" dataIndex="todo" />
             <Table.Column width={240} title="备注" dataIndex="memo" />

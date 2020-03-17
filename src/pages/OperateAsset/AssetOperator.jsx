@@ -54,7 +54,7 @@ export default class AssetOperator extends Component {
         <IceContainer style={styles.container}>
           <h4 style={styles.title}>{T("资产操作")}</h4>
           <IceContainer style={styles.subContainer}>
-            <Select
+            <Select language={T('zh-cn')}
               style={{ width: 350 }}
               placeholder={T("选择发起资产操作的账户")}
               onChange={this.onChangeAccount.bind(this)}

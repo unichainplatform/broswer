@@ -257,7 +257,8 @@ export default class TransactionList extends Component {
     return (
       <div className="progress-table">
         <IceContainer className="tab-card" title={T("交易")}>
-          <Table primaryKey="txHash"
+          <Table primaryKey="txHash" 
+            language={T('zh-cn')}
             dataSource={this.state.transactions}
           >
             <Table.Column title={T("交易Hash")} dataIndex="txHash" width={80} cell={this.renderHash.bind(this)}/>
@@ -273,7 +274,7 @@ export default class TransactionList extends Component {
 
           </Table>
         </IceContainer>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           style={{ width: 800 }}
           visible={this.state.innerTxVisible}
           title={T("内部交易信息")}
@@ -286,7 +287,7 @@ export default class TransactionList extends Component {
         >
           <div className="editable-table">
             <IceContainer>
-              <Table dataSource={this.state.innerTxInfos} hasBorder={false} resizable>
+              <Table dataSource={this.state.innerTxInfos} hasBorder={false} language={T('zh-cn')}resizable>
                 <Table.Column title={T("类型")} dataIndex="actionType" width={80} />
                 <Table.Column title={T("发起账号")} dataIndex="fromAccount" width={100} />
                 <Table.Column title={T("接收账号")} dataIndex="toAccount" width={80} />

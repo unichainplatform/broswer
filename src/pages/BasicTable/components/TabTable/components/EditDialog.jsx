@@ -67,7 +67,7 @@ export default class EditDialog extends Component {
         >
           编辑
         </Button>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           style={{ width: 640 }}
           visible={this.state.visible}
           onOk={this.handleSubmit}

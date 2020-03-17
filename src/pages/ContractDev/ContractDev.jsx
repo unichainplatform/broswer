@@ -1466,7 +1466,7 @@ export default class ContractManager extends Component {
             </Col>
             <Col fixedSpan="15" className="custom-col-right-sidebar">
               <Row style={{width:'100%'}}>
-                <Select
+                <Select language={T('zh-cn')}
                   style={{ width: 240 }}
                   placeholder={T("发起交易账户")}
                   onChange={this.onChangeAccount.bind(this)}
@@ -1477,7 +1477,7 @@ export default class ContractManager extends Component {
               </Row>
               <br/>
               <Row style={{width:'100%'}}>
-                <Select
+                <Select language={T('zh-cn')}
                   style={{ width: 240 }}
                   placeholder={T("请选择待编译文件")}
                   onChange={this.onChangeContractFile.bind(this)}
@@ -1489,7 +1489,7 @@ export default class ContractManager extends Component {
               </Row>
               <br/>
               <Row style={{width:'100%'}}>
-                <Select
+                <Select language={T('zh-cn')}
                   style={{ width: 240 }}
                   placeholder={T("请选择合约")}
                   onChange={this.onChangeContract.bind(this)}
@@ -1531,7 +1531,7 @@ export default class ContractManager extends Component {
         
         <br />
         <br />
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.addNewContractFileVisible}
           title={T("请输入合约文件名称")}
           closeable="true"
@@ -1548,7 +1548,7 @@ export default class ContractManager extends Component {
             onPressEnter={this.onAddNewContractFileOK.bind(this)}
           />
         </Dialog>
-        <Dialog closeable='close,esc,mask'
+        <Dialog closeable='close,esc,mask' language={T('zh-cn')}
           visible={this.state.contractInfoVisible}
           title={T("本地添加合约ABI信息")}
           footerAlign="center"
@@ -1566,7 +1566,7 @@ export default class ContractManager extends Component {
           />
         </Dialog>
         
-        <Dialog closeable='close,esc,mask'
+        <Dialog closeable='close,esc,mask' language={T('zh-cn')}
           visible={this.state.displayAbiVisible}
           title={T("合约ABI信息")}
           footerAlign="center"
@@ -1578,7 +1578,7 @@ export default class ContractManager extends Component {
           <ReactJson src={this.state.curAbi}/>
         </Dialog>
 
-        <Dialog closeable='close,esc,mask'
+        <Dialog closeable='close,esc,mask' language={T('zh-cn')}
           style={{ width: '500px' }}
           visible={this.state.displayBinVisible}
           title={T("合约BIN信息")}
@@ -1591,7 +1591,7 @@ export default class ContractManager extends Component {
           <IceEllipsis lineNumber={10} text= {this.state.curBin} />
         </Dialog>
 
-        <Dialog closeable='close,esc,mask'
+        <Dialog closeable='close,esc,mask' language={T('zh-cn')}
           visible={this.state.deployContractVisible}
           title={T("部署合约")}
           closeable="true"
@@ -1686,7 +1686,7 @@ export default class ContractManager extends Component {
             onPressEnter={this.onDeployContractOK.bind(this)}
           />
         </Dialog>
-        <Dialog
+        <Dialog language={T('zh-cn')}
           visible={this.state.createAccountVisible}
           onOk={this.onCreateAccountOK.bind(this)}
           onCancel={this.onCreateAccountClose.bind(this)}

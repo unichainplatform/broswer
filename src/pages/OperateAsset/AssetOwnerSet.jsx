@@ -107,7 +107,7 @@ export default class AssetOwnerSet extends Component {
             <Row style={styles.formRow} justify="center">
                         {T('需改变管理者的资产')}:
               <IceFormBinder required message="Required!">
-                <Select
+                <Select language={T('zh-cn')}
                   dataSource={this.state.assetInfoSet}
                   name="assetId"
                 />
