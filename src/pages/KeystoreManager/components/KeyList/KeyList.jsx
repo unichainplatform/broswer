@@ -343,10 +343,10 @@ export default class KeyList extends Component {
           {T('删除')}
           </Button>
           &nbsp;&nbsp;
-          <Button type="primary" onClick={this.createNewAccount.bind(this, index)}>
+          {/* <Button type="primary" onClick={this.createNewAccount.bind(this, index)}>
           {T('创建账户')}
           </Button>
-          &nbsp;&nbsp;
+          &nbsp;&nbsp; */}
           <Button type="primary" onClick={this.signTx.bind(this, index)}>
           {T('签名/验签')}
           </Button>
